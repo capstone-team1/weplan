@@ -4,7 +4,6 @@ const db = require('../db')
 const Events = db.define('events', {
   name: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false
   },
   description: {
