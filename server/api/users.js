@@ -45,7 +45,7 @@ router.post('/:userId/createEvent', async (req, res, next) => {
         description: req.body.description,
         location: req.body.location
       })
-      res.send(newEvent)
+      res.json(newEvent)
     }
   } catch (err) {
     next(err)

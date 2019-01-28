@@ -3,20 +3,20 @@ import axios from 'axios'
 /**
  * ACTION TYPES
  */
-const GET_EVENT = 'GET_EVENT'
-const CREATE_EVENT = 'CREATE_EVENT'
-/**
- * INITIAL STATE
- */
-const defaultEvent = {}
+const GET_EVENTS = 'GET_EVENTS'
+const SET_EVENT = 'SET_EVENT'
 
 /**
  * ACTION CREATORS
  */
-const gotSingleEvent = event => ({type: GET_EVENT, event})
-const createdEventForServer = event => {
+const gotEvents = events => ({
+  type: GET_EVENTS,
+  events
+})
+
+const createEvent = event => {
   return {
-    type: CREATE_EVENT,
+    type: SET_EVENT,
     event
   }
 }
@@ -24,33 +24,42 @@ const createdEventForServer = event => {
  * THUNK CREATORS
  */
 
-export const fetchSingleEvent = eventId => async dispatch => {
-  const {data} = await axios.get(`/api/events/${eventId}`)
-  const event = data
-  const action = gotSingleEvent(event)
+//needs changing
+export const fetchAllEvents = (userId, groupId) => async dispatch => {
+  const {data} = await axios.get(`/api/users/${userId}/`)
+  const events = data
+  const action = gotEvents(events)
   dispatch(action)
 }
 
-export const createOneEvent = event => async dispatch => {
+export const createOneEvent = (userId, event) => async dispatch => {
   try {
-    const {data} = await axios.post('/api/events', event)
+    const {data} = await axios.post(`/api/users/${userId}/createEvent`, event)
     const newEvent = data
-    const action = createdEventForServer(newEvent)
+    const action = createEvent(newEvent)
     dispatch(action)
   } catch (error) {
     console.error(error)
   }
 }
 
+//Initial State
+const initialState = {
+  events: {}
+}
+
 /**
  * REDUCER
  */
-export default function(state = defaultEvent, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_EVENT:
-      return action.event
-    case CREATE_EVENT:
-      return action.event
+    case GET_EVENTS:
+      return {...state, events: action.event}
+    case SET_EVENT:
+      return {
+        ...state,
+        events: action.event
+      }
     default:
       return state
   }
