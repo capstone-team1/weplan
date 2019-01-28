@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import NewEvent from './CreateEvent'
+import CreateEvent from './CreateEvent'
 
 /**
  * COMPONENT
@@ -12,7 +12,7 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <NewEvent />
+      <CreateEvent />
     </div>
   )
 }
