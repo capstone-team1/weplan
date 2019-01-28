@@ -5,9 +5,6 @@ import axios from 'axios'
  */
 const GET_EVENTS = 'GET_EVENTS'
 const SET_EVENT = 'SET_EVENT'
-/**
- * INITIAL STATE
- */
 
 /**
  * ACTION CREATORS
@@ -27,6 +24,7 @@ const createEvent = event => {
  * THUNK CREATORS
  */
 
+//needs changing
 export const fetchAllEvents = (userId, groupId) => async dispatch => {
   const {data} = await axios.get(`/api/users/${userId}/`)
   const events = data
@@ -45,8 +43,9 @@ export const createOneEvent = (userId, event) => async dispatch => {
   }
 }
 
+//Initial State
 const initialState = {
-  events: []
+  events: {}
 }
 
 /**
@@ -59,7 +58,7 @@ export default function(state = initialState, action) {
     case SET_EVENT:
       return {
         ...state,
-        events: [action.event]
+        events: action.event
       }
     default:
       return state
