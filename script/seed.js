@@ -7,6 +7,12 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
+  const newUser = await User.create({
+    handle: 'frank',
+    email: 'frank@email.com',
+    password: '123'
+  })
+
   const users = await Promise.all([
     User.create({handle: 'Cody', email: 'cody@email.com', password: '123'}),
     User.create({handle: 'Murphy', email: 'murphy@email.com', password: '123'})
@@ -28,8 +34,14 @@ async function seed() {
       downvotes: 2
     })
   ])
-
-  const group = await Promise.all([
+  const newEvent = await Events.create({
+    name: 'testEvent',
+    description: 'test',
+    location: 'testlocal',
+    upvotes: 1,
+    downvotes: 3
+  })
+  const groups = await Promise.all([
     Group.create({
       name: 'Fantastic four',
       description: 'Derping around',
@@ -41,9 +53,17 @@ async function seed() {
       chatId: 2
     })
   ])
+  const newGroup = await Group.create({
+    name: 'newGroup',
+    description: 'testGroup',
+    chatId: '3'
+  })
+  await newGroup.setEvents(events[0])
+  await newEvent.setGroup(groups[0])
+  await newUser.setGroups(groups[0])
 
   console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${group.length} groups`)
+  console.log(`seeded ${groups.length} groups`)
   console.log(`seeded ${events.length} events`)
   console.log(`seeded successfully`)
 }
