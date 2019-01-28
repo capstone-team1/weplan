@@ -36,3 +36,18 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+router.post('/:userId/createEvent', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const newEvent = await Events.create({
+        name: req.body.name,
+        description: req.body.description,
+        location: req.body.location
+      })
+      res.send(newEvent)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
