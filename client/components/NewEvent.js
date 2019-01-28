@@ -26,6 +26,7 @@ class NewEvent extends Component {
     this.setState({
       values
     })
+    console.log(values)
     const {name, description, location, firstchoice, secondchoice} = this.state
     const newEvent = {
       name,

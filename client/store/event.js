@@ -8,7 +8,6 @@ const SET_EVENT = 'SET_EVENT'
 /**
  * INITIAL STATE
  */
-const defaultEvent = {}
 
 /**
  * ACTION CREATORS
@@ -35,9 +34,9 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   dispatch(action)
 }
 
-export const createOneEvent = event => async dispatch => {
+export const createOneEvent = (userId, event) => async dispatch => {
   try {
-    const {data} = await axios.post('/api/users/:uderId/createEvent', event)
+    const {data} = await axios.post(`/api/users/${userId}/createEvent`, event)
     const newEvent = data
     const action = createEvent(newEvent)
     dispatch(action)
@@ -46,15 +45,22 @@ export const createOneEvent = event => async dispatch => {
   }
 }
 
+const initialState = {
+  events: []
+}
+
 /**
  * REDUCER
  */
-export default function(state = defaultEvent, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
-      return action.event
+      return {...state, events: action.event}
     case SET_EVENT:
-      return action.event
+      return {
+        ...state,
+        events: [action.event]
+      }
     default:
       return state
   }
