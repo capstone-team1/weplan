@@ -1,18 +1,50 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Events, Group} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
   const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({handle: 'Cody', email: 'cody@email.com', password: '123'}),
+    User.create({handle: 'Murphy', email: 'murphy@email.com', password: '123'})
+  ])
+
+  const events = await Promise.all([
+    Events.create({
+      name: 'Dinner at OpenMarket',
+      description: 'Meet up for fun cheap half off dinner',
+      location: '343 Hanover',
+      upvotes: 2,
+      downvotes: 1
+    }),
+    Events.create({
+      name: 'Kilarny',
+      description: 'Shots!',
+      location: '7 Hanover',
+      upvotes: 1,
+      downvotes: 2
+    })
+  ])
+
+  const group = await Promise.all([
+    Group.create({
+      name: 'Fantastic four',
+      description: 'Derping around',
+      chatId: 1
+    }),
+    Group.create({
+      name: 'FSGroup1',
+      description: 'NoMoreShots!',
+      chatId: 2
+    })
   ])
 
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${group.length} groups`)
+  console.log(`seeded ${events.length} events`)
   console.log(`seeded successfully`)
 }
 
