@@ -7,82 +7,84 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const newUser = await User.create({
+  //seed users
+  const user1 = await User.create({
     handle: 'frank',
     email: 'frank@email.com',
     password: '123'
   })
 
-  const users = await Promise.all([
-    User.create({handle: 'Cody', email: 'cody@email.com', password: '123'}),
-    User.create({handle: 'Murphy', email: 'murphy@email.com', password: '123'}),
-    User.create({handle: 'Tom', email: 'tom@email.com', password: '123'}),
-    User.create({handle: 'Steve', email: 'steve@email.com', password: '123'}),
-    User.create({handle: 'Joe', email: 'joe@email.com', password: '123'}),
-    User.create({handle: 'Jim', email: 'jim@email.com', password: '123'})
-  ])
+  const user2 = await User.create({
+    handle: 'Cody',
+    email: 'cody@email.com',
+    password: '123'
+  })
 
-  const events = await Promise.all([
-    Events.create({
-      name: 'Dinner at OpenMarket',
-      description: 'Meet up for fun cheap half off dinner',
-      location: '343 Hanover',
-      votes: 2
-    }),
-    Events.create({
-      name: 'Kilarny',
-      description: 'Shots!',
-      location: '7 Hanover',
-      votes: 1
-    })
-  ])
-  const newEvent = await Events.create({
-    name: 'testEvent',
-    description: 'test',
-    location: 'testlocal',
+  const user3 = await User.create({
+    handle: 'Murphy',
+    email: 'murphy@email.com',
+    password: '123'
+  })
+
+  //seed events
+  const event1 = await Events.create({
+    name: 'Dinner at OpenMarket',
+    description: 'Meet up for fun cheap half off dinner',
+    location: '343 Hanover',
+    votes: 2
+  })
+
+  const event2 = await Events.create({
+    name: 'Kilarny',
+    description: 'Shots!',
+    location: '7 Hanover',
     votes: 1
   })
-  const groups = await Promise.all([
-    Group.create({
-      name: 'Fantastic four',
-      description: 'Derping around'
-    }),
-    Group.create({
-      name: 'FSGroup1',
-      description: 'NoMoreShots!'
-    }),
-    Group.create({
-      name: 'Football Buds',
-      description: 'Football'
-    }),
-    Group.create({
-      name: 'Soccer Buds',
-      description: 'Soccer'
-    })
-  ])
-  const newGroup = await Group.create({
-    name: 'newGroup',
-    description: 'testGroup'
+
+  const event3 = await Events.create({
+    name: 'Toms Restaurant',
+    description: 'fun time',
+    location: '11 Hanover',
+    votes: 1
   })
 
-  const tennis = Group.create({
-    name: 'Tennis Buds',
-    description: 'Tennis'
+  //seed groups
+  const group1 = await Group.create({
+    name: 'Fantastic four',
+    description: 'Derping around'
   })
 
-  const golf = Group.create({
-    name: 'Golf  Buds',
-    description: 'Golf!'
+  const group2 = await Group.create({
+    name: 'FSGroup1',
+    description: 'NoMoreShots!'
   })
 
-  await newGroup.setEvents(events[0])
-  await newEvent.setGroup(groups[0])
-  await newUser.setGroups(groups[0])
-  await newUser.setGroups(groups[1])
+  const group3 = await Group.create({
+    name: 'Football Buds',
+    description: 'Football'
+  })
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${groups.length} groups`)
-  console.log(`seeded ${events.length} events`)
+  await user1.setGroups(group1)
+  await group1.setUsers(user1)
+  await event1.setGroup(group1)
+  await group1.setEvents(event1)
+  await event1.setUsers(user1)
+
+  await user2.setGroups(group2)
+  await group2.setUsers(user2)
+  await event2.setGroup(group2)
+  await group2.setEvents(event2)
+  await event2.setUsers(user2)
+
+  await user3.setGroups(group3)
+  await group3.setUsers(user3)
+  await event3.setGroup(group3)
+  await group3.setEvents(event3)
+  await event3.setUsers(user3)
+
+  // console.log(`seeded ${users.length} users`)
+  // console.log(`seeded ${groups.length} groups`)
+  // console.log(`seeded ${events.length} events`)
   console.log(`seeded successfully`)
 }
 
