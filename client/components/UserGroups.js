@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import {fetchAllGroups} from '../store/index'
 import GroupCard from './GroupCard'
 
-class UserGroups extends React.Component {
+class UserGroups extends Component {
   async componentDidMount() {
     let userId = this.props.id
     await this.props.fetchAllGroups(userId)
