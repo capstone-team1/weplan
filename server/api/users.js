@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Group, Events, userGroup} = require('../db/models')
+const {User, Group, Events} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -52,8 +52,6 @@ router.get('/:userId/groups', async (req, res, next) => {
 })
 
 router.post('/:userId/groups', async (req, res, next) => {
-  console.log('i"m in the group post route')
-  console.log('my user id is:', req.user)
   if (req.user && req.user.id === Number(req.params.userId)) {
     try {
       const {name, description} = req.body

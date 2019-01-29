@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import CreateEvent from './CreateEvent'
-import UserGroups from './UserGroups'
 import {Carousel} from 'react-bootstrap'
 
 /**
@@ -14,8 +12,6 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <CreateEvent />
-      <UserGroups />
       <Carousel interval={2000}>
         <Carousel.Item>
           <img
