@@ -45,7 +45,7 @@ export const createOneGroup = userId => async dispatch => {
 
 //Initial State
 const initialState = {
-  groups: {}
+  groups: []
 }
 
 /**
@@ -54,7 +54,7 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_GROUPS:
-      return {...state, groups: action.group}
+      return {...state, groups: action.groups}
     case SET_GROUP:
       return {
         ...state,

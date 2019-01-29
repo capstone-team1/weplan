@@ -1,28 +1,33 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllGroups} from '../store/index'
 
 class UserGroups extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   async componentDidMount() {
-    let userId = this.props.userId
+    let userId = this.props.id
     await this.props.fetchAllGroups(userId)
   }
   render() {
+    let groups = this.props.groups
     return (
       <div>
-        <h1>works?</h1>
+        {groups.map(group => {
+          return (
+            <tr key={group.id}>
+              <p>Group Name:{group.name}</p>
+              <p>Group Description:{group.description}</p>
+            </tr>
+          )
+        })}
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  groups: state.groupReducer.groups
+  groups: state.groupReducer.groups,
+  id: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({
