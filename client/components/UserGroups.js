@@ -12,6 +12,7 @@ class UserGroups extends Component {
   render() {
     //CG: Get in the habit of standardizing destructuring.
     let groups = this.props.groups
+
     return (
       <div>
         {groups.map(({name, description}, i) => {
