@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 import {fetchAllGroups} from '../store/index'
-import GroupCard from './GroupCard'
+import {CreateGroup, GroupCard} from './index'
 
 class UserGroups extends Component {
   async componentDidMount() {
@@ -10,14 +10,22 @@ class UserGroups extends Component {
     await this.props.fetchAllGroups(userId)
   }
   render() {
-    //CG: Get in the habit of standardizing destructuring.
+    console.log(this.props, 'asdas')
     let groups = this.props.groups
-
     return (
       <div>
-        {groups.map(({name, description}, i) => {
-          return <GroupCard name={name} description={description} key={i} />
-        })}
+        <div>
+          {groups.map(({id, name, description}) => {
+            return (
+              <Link to={`/users/${this.props.id}/groups/${id}`} key={name}>
+                <GroupCard name={name} description={description} />
+              </Link>
+            )
+          })}
+        </div>
+        <div>
+          <CreateGroup />
+        </div>
       </div>
     )
   }

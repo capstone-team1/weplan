@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_GROUPS = 'GET_GROUPS'
+const GET_SINGLE_GROUP = 'GET_SINGLE_GROUP'
 const SET_GROUP = 'SET_GROUP'
 
 /**
@@ -14,7 +15,12 @@ const gotGroups = groups => ({
   groups
 })
 
-const createGroup = group => {
+const gotSingleGroup = group => ({
+  type: GET_SINGLE_GROUP,
+  group
+})
+
+const setGroup = group => {
   return {
     type: SET_GROUP,
     group
@@ -26,21 +32,29 @@ const createGroup = group => {
 
 //needs changing
 export const fetchAllGroups = userId => async dispatch => {
-  const {data} = await axios.get(`/api/users/${userId}/groups`)
-  //CG: This next line of code is silly :O
-  const groups = data
-  const action = gotGroups(groups)
-  dispatch(action)
+  try {
+    const {data} = await axios.get(`/api/users/${userId}/groups`)
+    dispatch(gotGroups(data))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-export const createOneGroup = userId => async dispatch => {
+export const fetchSingleGroup = (userId, groupId) => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/users/${userId}/createEvent`, event)
-    const newGroup = data
-    const action = createGroup(newGroup)
-    dispatch(action)
-  } catch (error) {
-    console.error(error)
+    const {data} = await axios.get(`api/users/${userId}/groups/${groupId}`)
+    dispatch(gotSingleGroup(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const createGroup = (userId, group) => async dispatch => {
+  try {
+    const {data} = await axios.post(`/api/users/${userId}/groups`, group)
+    dispatch(setGroup(data))
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -56,11 +70,10 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_GROUPS:
       return {...state, groups: action.groups}
+    case GET_SINGLE_GROUP:
+      return {...state, group: action.group}
     case SET_GROUP:
-      return {
-        ...state,
-        groups: action.group
-      }
+      return {...state, groups: [...state.groups, action.group]}
     default:
       return state
   }
