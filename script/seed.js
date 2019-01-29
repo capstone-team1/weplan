@@ -15,7 +15,11 @@ async function seed() {
 
   const users = await Promise.all([
     User.create({handle: 'Cody', email: 'cody@email.com', password: '123'}),
-    User.create({handle: 'Murphy', email: 'murphy@email.com', password: '123'})
+    User.create({handle: 'Murphy', email: 'murphy@email.com', password: '123'}),
+    User.create({handle: 'Tom', email: 'tom@email.com', password: '123'}),
+    User.create({handle: 'Steve', email: 'steve@email.com', password: '123'}),
+    User.create({handle: 'Joe', email: 'joe@email.com', password: '123'}),
+    User.create({handle: 'Jim', email: 'jim@email.com', password: '123'})
   ])
 
   const events = await Promise.all([
@@ -46,12 +50,31 @@ async function seed() {
     Group.create({
       name: 'FSGroup1',
       description: 'NoMoreShots!'
+    }),
+    Group.create({
+      name: 'Football Buds',
+      description: 'Football'
+    }),
+    Group.create({
+      name: 'Soccer Buds',
+      description: 'Soccer'
     })
   ])
   const newGroup = await Group.create({
     name: 'newGroup',
     description: 'testGroup'
   })
+
+  const tennis = Group.create({
+    name: 'Tennis Buds',
+    description: 'Tennis'
+  })
+
+  const golf = Group.create({
+    name: 'Golf  Buds',
+    description: 'Golf!'
+  })
+
   await newGroup.setEvents(events[0])
   await newEvent.setGroup(groups[0])
   await newUser.setGroups(groups[0])
