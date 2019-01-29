@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllGroups} from '../store/index'
+import GroupCard from './GroupCard'
 
-class UserGroups extends React.Component {
+class UserGroups extends Component {
   async componentDidMount() {
     let userId = this.props.id
     await this.props.fetchAllGroups(userId)
@@ -11,15 +12,11 @@ class UserGroups extends React.Component {
   render() {
     //CG: Get in the habit of standardizing destructuring.
     let groups = this.props.groups
+
     return (
       <div>
-        {groups.map(group => { //CG: Make this into a separate GroupCard component.
-          return (
-            <tr key={group.id}>
-              <p>Group Name:{group.name}</p>
-              <p>Group Description:{group.description}</p>
-            </tr>
-          )
+        {groups.map(({name, description}, i) => {
+          return <GroupCard name={name} description={description} key={i} />
         })}
       </div>
     )

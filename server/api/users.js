@@ -51,6 +51,26 @@ router.get('/:userId/groups', async (req, res, next) => {
   }
 })
 
+router.post('/:userId/groups', async (req, res, next) => {
+  console.log('i"m in the group post route')
+  console.log('my user id is:', req.user)
+  if (req.user && req.user.id === Number(req.params.userId)) {
+    try {
+      const {name, description} = req.body
+      const newGroup = await Group.create({
+        name,
+        description
+      })
+      const user = await User.findById(Number(req.params.userId))
+
+      await user.addGroup(newGroup)
+      res.json(newGroup)
+    } catch (err) {
+      next(err)
+    }
+  }
+})
+
 //CG: Definitely /groups/:groupId/events
 //CG: This should at least just say events .
 // /groups/:groupId/events/create FRONT END ONLY
