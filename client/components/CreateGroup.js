@@ -52,10 +52,16 @@ class CreateGroup extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    userId: state.user.id
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     createGroup: (userId, newGroup) => dispatch(createGroup(userId, newGroup))
   }
 }
 
-export default connect(null, mapDispatchToProps)(CreateGroup)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateGroup)
