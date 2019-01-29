@@ -9,9 +9,9 @@ const Events = require('./events')
  *    BlogPost.belongsTo(User)
  */
 
-User.hasMany(Group)
-User.belongsToMany(Group, {through: 'userGroup'})
-Group.belongsToMany(User, {through: 'userGroup'})
+User.hasMany(Group) //CG: I'm not convinced you need this. let user = await User.findById(1); user.getGroups()
+User.belongsToMany(Group, {through: 'userGroup'}) //users_groups
+Group.belongsToMany(User, {through: 'userGroup'}) //memberships
 
 Events.belongsTo(Group)
 Group.hasMany(Events)

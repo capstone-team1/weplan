@@ -9,6 +9,7 @@ const SET_EVENT = 'SET_EVENT'
 /**
  * ACTION CREATORS
  */
+//CG: These are probably setters as they're being called from thunks.
 const gotEvents = events => ({
   type: GET_EVENTS,
   events
@@ -32,6 +33,7 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   dispatch(action)
 }
 
+//CG: Call this createEvent
 export const createOneEvent = (userId, event) => async dispatch => {
   try {
     const {data} = await axios.post(`/api/users/${userId}/createEvent`, event)

@@ -9,10 +9,11 @@ class UserGroups extends React.Component {
     await this.props.fetchAllGroups(userId)
   }
   render() {
+    //CG: Get in the habit of standardizing destructuring.
     let groups = this.props.groups
     return (
       <div>
-        {groups.map(group => {
+        {groups.map(group => { //CG: Make this into a separate GroupCard component.
           return (
             <tr key={group.id}>
               <p>Group Name:{group.name}</p>
