@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {createOneEvent} from '../store/index'
+import {createEvent} from '../store/index'
 import {connect} from 'react-redux'
 import {Button} from 'react-bootstrap'
 
@@ -24,7 +24,7 @@ class CreateEvent extends Component {
   handleSubmit(event) {
     event.preventDefault()
     let userId = this.props.userId
-    this.props.createOneEvent(userId, this.state)
+    this.props.createEvent(userId, this.state)
     this.setState({
       name: '',
       description: '',
@@ -64,7 +64,7 @@ class CreateEvent extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     createOneEvent: (userId, newEvent) =>
-      dispatch(createOneEvent(userId, newEvent))
+      dispatch(createEvent(userId, newEvent))
   }
 }
 

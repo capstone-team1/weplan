@@ -5,14 +5,14 @@ const Group = db.define('group', {
   //CG: Stronger validations here. notEmpty, etc.
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.STRING,
     allowNull: false
-  },
-  chatId: {
-    type: Sequelize.INTEGER
   }
 })
 

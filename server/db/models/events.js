@@ -2,13 +2,12 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Events = db.define('events', {
-  //CG: Stronger validations here. 
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    // validate: {
-    //   notEmpty: true
-    // }
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: Sequelize.STRING,
@@ -19,11 +18,7 @@ const Events = db.define('events', {
     type: Sequelize.STRING
   },
   //CG: I could agree that votes denormalized is a good idea for loading purposes but don't necessarily thing you should denormalize twice.
-  upvotes: {
-    type: Sequelize.INTEGER,
-    defaultValue: 0
-  },
-  downvotes: {
+  votes: {
     type: Sequelize.INTEGER,
     defaultValue: 0
   }
