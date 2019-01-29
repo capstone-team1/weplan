@@ -23,7 +23,7 @@ class CreateGroup extends Component {
   handleSubmit(event) {
     event.preventDefault()
     let userId = this.props.userId
-    this.props.createOneGroup(userId, this.state)
+    this.props.createGroup(userId, this.state)
     this.setState({
       name: '',
       description: ''
