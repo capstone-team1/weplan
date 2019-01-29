@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Group, Events} = require('../db/models')
+const {User, Group, Events, userGroup} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -31,6 +31,22 @@ router.get('/:userId', async (req, res, next) => {
         ]
       })
       res.json(users)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:userId/groups', async (req, res, next) => {
+  try {
+    if (req.user) {
+      let id = req.params.userId
+      let curGroups = await Group.findAll({
+        where: {
+          userId: id
+        }
+      })
+      res.json(curGroups)
     }
   } catch (err) {
     next(err)

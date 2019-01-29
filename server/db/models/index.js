@@ -8,6 +8,8 @@ const Events = require('./events')
  *
  *    BlogPost.belongsTo(User)
  */
+
+User.hasMany(Group)
 User.belongsToMany(Group, {through: 'userGroup'})
 Group.belongsToMany(User, {through: 'userGroup'})
 
