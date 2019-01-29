@@ -71,9 +71,15 @@ router.post('/:userId/groups', async (req, res, next) => {
   }
 })
 
-//CG: Definitely /groups/:groupId/events
-//CG: This should at least just say events .
-// /groups/:groupId/events/create FRONT END ONLY
+router.get('/:userId/events/:eventId', async (req, res, next) => {
+  try {
+    const event = await Events.findById(req.params.eventId)
+    res.json(event)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/:userId/events', async (req, res, next) => {
   try {
     if (req.user) {

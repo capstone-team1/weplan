@@ -4,6 +4,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_EVENTS = 'GET_EVENTS'
+const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 
 /**
@@ -13,6 +14,11 @@ const SET_EVENT = 'SET_EVENT'
 const gotEvents = events => ({
   type: GET_EVENTS,
   events
+})
+
+const gotEvent = singleEvent => ({
+  type: GET_SINGLE_EVENT,
+  singleEvent
 })
 
 const setEvent = event => {
@@ -33,6 +39,12 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   dispatch(action)
 }
 
+export const fetchSingleEvent = (userId, eventId) => async dispatch => {
+  const event = await axios.get(`/api/users/${userId}/events/${eventId}/`)
+  const action = gotEvent(event)
+  dispatch(action)
+}
+
 //CG: Call this createEvent
 export const createEvent = (userId, event) => async dispatch => {
   try {
@@ -47,7 +59,8 @@ export const createEvent = (userId, event) => async dispatch => {
 
 //Initial State
 const initialState = {
-  events: {}
+  events: [],
+  singleEvent: {}
 }
 
 /**
@@ -57,6 +70,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
       return {...state, events: action.event}
+    case GET_SINGLE_EVENT:
+      return {...state, singleEvent: action.singleEvent}
     case SET_EVENT:
       return {
         ...state,
