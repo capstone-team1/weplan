@@ -27,6 +27,7 @@ const createGroup = group => {
 //needs changing
 export const fetchAllGroups = userId => async dispatch => {
   const {data} = await axios.get(`/api/users/${userId}/groups`)
+  //CG: This next line of code is silly :O
   const groups = data
   const action = gotGroups(groups)
   dispatch(action)

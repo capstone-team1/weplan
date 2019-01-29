@@ -9,12 +9,15 @@ const Events = require('./events')
  *    BlogPost.belongsTo(User)
  */
 
-User.hasMany(Group)
-User.belongsToMany(Group, {through: 'userGroup'})
-Group.belongsToMany(User, {through: 'userGroup'})
+// User.hasMany(Group) //CG: I'm not convinced you need this. let user = await User.findById(1); user.getGroups()
+User.belongsToMany(Group, {through: 'user_group'}) //users_groups
+Group.belongsToMany(User, {through: 'user_group'}) //memberships
 
 Events.belongsTo(Group)
 Group.hasMany(Events)
+
+User.belongsTo(Events)
+Events.hasMany(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

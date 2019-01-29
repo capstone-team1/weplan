@@ -23,44 +23,39 @@ async function seed() {
       name: 'Dinner at OpenMarket',
       description: 'Meet up for fun cheap half off dinner',
       location: '343 Hanover',
-      upvotes: 2,
-      downvotes: 1
+      votes: 2
     }),
     Events.create({
       name: 'Kilarny',
       description: 'Shots!',
       location: '7 Hanover',
-      upvotes: 1,
-      downvotes: 2
+      votes: 1
     })
   ])
   const newEvent = await Events.create({
     name: 'testEvent',
     description: 'test',
     location: 'testlocal',
-    upvotes: 1,
-    downvotes: 3
+    votes: 1
   })
   const groups = await Promise.all([
     Group.create({
       name: 'Fantastic four',
-      description: 'Derping around',
-      chatId: 1
+      description: 'Derping around'
     }),
     Group.create({
       name: 'FSGroup1',
-      description: 'NoMoreShots!',
-      chatId: 2
+      description: 'NoMoreShots!'
     })
   ])
   const newGroup = await Group.create({
     name: 'newGroup',
-    description: 'testGroup',
-    chatId: '3'
+    description: 'testGroup'
   })
   await newGroup.setEvents(events[0])
   await newEvent.setGroup(groups[0])
   await newUser.setGroups(groups[0])
+  await newUser.setGroups(groups[1])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${groups.length} groups`)
