@@ -103,7 +103,8 @@ export default function(state = initialState, action) {
             return event.id !== action.event.id
           })
         ],
-        singleEvent: state.singleEvent.id !== action.id ? state.singleEvent : {}
+        singleEvent:
+          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
       }
     default:
       return state
