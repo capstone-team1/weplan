@@ -103,14 +103,16 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
 
 router.put('/:userId/events/:eventId', async (req, res, next) => {
   try {
-    const event = Event.findById(req.params.eventId)
-    const updateArr = await Event.update(
+    const event = await Events.findById(+req.params.eventId)
+    const newVotes = event.votes + +req.body.vote
+    console.log(event)
+    const updateArr = await Events.update(
       {
-        votes: event.votes + req.body.vote //req.body.vote will either be 1 or -1
+        votes: newVotes //req.body.vote will either be 1 or -1
       },
       {
         returning: true,
-        where: {id: req.params.id}
+        where: {id: req.params.userId}
       }
     )
     res.json(updateArr[1][0]) // Model.update "returns a promise for an array.

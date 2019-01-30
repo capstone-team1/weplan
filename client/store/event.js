@@ -7,6 +7,7 @@ const GET_EVENTS = 'GET_EVENTS'
 const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
+const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
 
 /**
  * ACTION CREATORS
@@ -35,6 +36,14 @@ const deleteEvent = event => {
     event
   }
 }
+
+const updateEventVote = event => {
+  return {
+    type: UPDATE_EVENT_VOTE,
+    event
+  }
+}
+
 /**
  * THUNK CREATORS
  */
@@ -64,6 +73,17 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
   try {
     const event = await axios.delete(`/api/users/${userId}/events/${eventId}/`)
     const action = deleteEvent(event)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
+export const changeEventVote = (userId, eventId, vote) => async dispatch => {
+  try {
+    const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
+      vote
+    })
+    const action = updateEventVote(event)
     dispatch(action)
   } catch (error) {
     console.error(error)
@@ -99,6 +119,19 @@ export default function(state = initialState, action) {
           })
         ],
         singleEvent: state.event.id !== action.event.id ? state.event : {}
+      }
+    case UPDATE_EVENT_VOTE:
+      return {
+        ...state,
+        events: [
+          ...state.events
+            .filter(event => {
+              return event.id !== action.event.id
+            })
+            .concat(event)
+        ],
+        singleEvent:
+          state.singleEvent.id !== action.event.id ? state.singleEvent : event
       }
     default:
       return state
