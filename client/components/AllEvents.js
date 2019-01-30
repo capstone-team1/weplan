@@ -5,7 +5,6 @@ import EventCard from './EventCard'
 
 class AllEvents extends Component {
   async componentDidMount() {
-    console.log(this.props, 'Allevents props')
     let userId = this.props.userId
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)

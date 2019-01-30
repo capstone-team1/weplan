@@ -43,7 +43,6 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   const {data} = await axios.get(
     `/api/users/${userId}/groups/${groupId}/events`
   )
-  console.log(data, 'datattat')
   dispatch(gotEvents(data))
 }
 
@@ -52,7 +51,6 @@ export const fetchSingleEvent = (userId, eventId) => async dispatch => {
   dispatch(gotEvent(event))
 }
 
-//CG: Call this createEvent
 export const createEvent = (userId, event) => async dispatch => {
   try {
     const {data} = await axios.post(`/api/users/${userId}/events`, event)
@@ -82,7 +80,6 @@ const initialState = {
  * REDUCER
  */
 export default function(state = initialState, action) {
-  console.log(action, 'actionnn')
   switch (action.type) {
     case GET_EVENTS:
       return {...state, events: action.event}
@@ -101,8 +98,7 @@ export default function(state = initialState, action) {
             return event.id !== action.event.id
           })
         ],
-        singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
+        singleEvent: state.event.id !== action.event.id ? state.event : {}
       }
     default:
       return state

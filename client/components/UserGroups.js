@@ -14,10 +14,10 @@ class UserGroups extends Component {
     return (
       <div>
         <div>
-          {groups.map(({name, description}) => {
+          {groups.map(({id, name, description}) => {
             return (
               <Link to="/group" key={name}>
-                <GroupCard name={name} description={description} />
+                <GroupCard name={name} description={description} groupId={id} />
               </Link>
             )
           })}
