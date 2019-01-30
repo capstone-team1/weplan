@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createGroup} from '../store/index'
 import {connect} from 'react-redux'
-import {Button} from 'react-bootstrap'
+import {Button, Form} from 'react-bootstrap'
 
 class CreateGroup extends Component {
   constructor() {
@@ -31,7 +31,7 @@ class CreateGroup extends Component {
   }
   render() {
     return (
-      <form onChange={this.handleChange}>
+      <Form onChange={this.handleChange}>
         <input
           id="groupName"
           type="text"
@@ -47,7 +47,7 @@ class CreateGroup extends Component {
           placeholder="Enter description"
         />
         <Button onClick={this.handleSubmit}>Submit</Button>
-      </form>
+      </Form>
     )
   }
 }
