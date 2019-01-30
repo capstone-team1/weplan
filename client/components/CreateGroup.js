@@ -43,7 +43,7 @@ class CreateGroup extends Component {
           id="groupDescription"
           type="text"
           name="description"
-          value={this.state.decription}
+          value={this.state.description}
           placeholder="Enter description"
         />
         <Button onClick={this.handleSubmit}>Submit</Button>
