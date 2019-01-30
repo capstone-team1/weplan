@@ -13,11 +13,11 @@ const Events = require('./events')
 User.belongsToMany(Group, {through: 'user_group'}) //users_groups
 Group.belongsToMany(User, {through: 'user_group'}) //memberships
 
+User.belongsToMany(Events, {through: 'user_events'})
+Events.belongsToMany(User, {through: 'user_events'})
+
 Events.belongsTo(Group)
 Group.hasMany(Events)
-
-User.belongsTo(Events)
-Events.hasMany(User)
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
