@@ -9,6 +9,7 @@ class AllEvents extends Component {
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)
   }
+
   render() {
     const {events} = this.props
     return (
@@ -16,7 +17,13 @@ class AllEvents extends Component {
         <h3>Let the Hunger Games begin!</h3>
         <div>
           {events.map(event => {
-            return <EventCard event={event} key={event.id} />
+            return (
+              <EventCard
+                event={event}
+                key={event.id}
+                userId={this.props.userId}
+              />
+            )
           })}
         </div>
       </div>
