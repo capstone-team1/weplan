@@ -8,7 +8,7 @@ class AllEvents extends Component {
     console.log(this.props, 'Allevents props')
     let userId = this.props.userId
     let groupId = this.props.groupId
-    await this.props.getAllEvents(userId, groupId)
+    await this.props.fetchAllEvents(userId, groupId)
   }
   render() {
     const {events} = this.props
@@ -16,9 +16,9 @@ class AllEvents extends Component {
       <div id="all-events">
         <h3>Let the Hunger Games begin!</h3>
         <div>
-          {/* {events.map(event => {
+          {events.map(event => {
             return <EventCard event={event} key={event.id} />
-          })} */}
+          })}
         </div>
       </div>
     )
@@ -27,7 +27,7 @@ class AllEvents extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.events,
+    events: state.event.events,
     userId: state.user.id,
     groupId: state.groupReducer.group.id
   }
@@ -35,7 +35,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllEvents: (userId, groupId) => dispatch(fetchAllEvents(userId, groupId))
+    fetchAllEvents: (userId, groupId) =>
+      dispatch(fetchAllEvents(userId, groupId))
   }
 }
 

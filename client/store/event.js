@@ -17,9 +17,9 @@ const gotEvents = events => ({
   events
 })
 
-const gotEvent = singleEvent => ({
+const gotEvent = event => ({
   type: GET_SINGLE_EVENT,
-  singleEvent
+  event
 })
 
 const setEvent = event => {
@@ -43,6 +43,7 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   const {data} = await axios.get(
     `/api/users/${userId}/groups/${groupId}/events`
   )
+  console.log(data, 'datattat')
   dispatch(gotEvents(data))
 }
 
@@ -74,13 +75,14 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
 //Initial State
 const initialState = {
   events: [],
-  singleEvent: {}
+  event: {}
 }
 
 /**
  * REDUCER
  */
 export default function(state = initialState, action) {
+  console.log(action, 'actionnn')
   switch (action.type) {
     case GET_EVENTS:
       return {...state, events: action.event}

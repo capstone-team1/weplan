@@ -73,8 +73,9 @@ router.post('/:userId/groups', async (req, res, next) => {
 
 router.get('/:userId/groups/:groupId/events', async (req, res, next) => {
   try {
-    console.log(req.params.groupId)
-    const events = await Events.findAll({where: {groupId: req.params.groupId}})
+    let groupId = req.params.groupId
+    const events = await Events.findById(1)
+    console.log(events, ' eventsapi')
     res.json(events)
   } catch (err) {
     next(err)
