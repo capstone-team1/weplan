@@ -5,19 +5,20 @@ import EventCard from './EventCard'
 
 class AllEvents extends Component {
   async componentDidMount() {
+    console.log(this.props, 'Allevents props')
+    let userId = this.props.userId
     let groupId = this.props.groupId
-    await this.props.getAllEvents(groupId)
+    await this.props.getAllEvents(userId, groupId)
   }
   render() {
-    console.log(this.props)
     const {events} = this.props
     return (
       <div id="all-events">
         <h3>Let the Hunger Games begin!</h3>
         <div>
-          {events.map(event => {
+          {/* {events.map(event => {
             return <EventCard event={event} key={event.id} />
-          })}
+          })} */}
         </div>
       </div>
     )
@@ -26,13 +27,15 @@ class AllEvents extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.events
+    events: state.events,
+    userId: state.user.id,
+    groupId: state.groupReducer.group.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllEvents: groupId => dispatch(fetchAllEvents(groupId))
+    getAllEvents: (userId, groupId) => dispatch(fetchAllEvents(userId, groupId))
   }
 }
 

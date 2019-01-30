@@ -31,29 +31,25 @@ const setEvent = event => {
  * THUNK CREATORS
  */
 
-//needs changing
 export const fetchAllEvents = (userId, groupId) => async dispatch => {
-  const {data} = await axios.get(`/api/users/${userId}/`)
-  const events = data
-  const action = gotEvents(events)
-  dispatch(action)
+  const {data} = await axios.get(
+    `/api/users/${userId}/groups/${groupId}/events`
+  )
+  dispatch(gotEvents(data))
 }
 
 export const fetchSingleEvent = (userId, eventId) => async dispatch => {
-  const event = await axios.get(`/api/users/${userId}/events/${eventId}/`)
-  const action = gotEvent(event)
-  dispatch(action)
+  const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
+  dispatch(gotEvent(event))
 }
 
 //CG: Call this createEvent
 export const createEvent = (userId, event) => async dispatch => {
   try {
     const {data} = await axios.post(`/api/users/${userId}/events`, event)
-    const newEvent = data
-    const action = setEvent(newEvent)
-    dispatch(action)
-  } catch (error) {
-    console.error(error)
+    dispatch(setEvent(data))
+  } catch (err) {
+    console.error(err)
   }
 }
 

@@ -5,18 +5,23 @@ import {fetchSingleGroup} from '../store/index'
 
 class SingleGroup extends Component {
   async componentDidMount() {
+    console.log('asdsa')
+    let userId = this.props.userId
     let groupId = this.props.group.id
-    let userId = this.props.user.id
     await this.props.fetchSingleGroup(userId, groupId)
   }
   render() {
-    return <AllEvents />
+    return (
+      <div>
+        <AllEvents />
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   group: state.groupReducer.group,
-  user: state.user.id
+  userId: state.user.id
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -30,7 +30,6 @@ const setGroup = group => {
  * THUNK CREATORS
  */
 
-//needs changing
 export const fetchAllGroups = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/users/${userId}/groups`)
@@ -60,7 +59,8 @@ export const createGroup = (userId, group) => async dispatch => {
 
 //Initial State
 const initialState = {
-  groups: []
+  groups: [],
+  group: {}
 }
 
 /**
