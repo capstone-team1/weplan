@@ -66,7 +66,9 @@ export const createGroup = (userId, group) => async dispatch => {
 export const removeSingleGroup = (groupId, userId) => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete(`/${userId}/groups/${groupId}`)
+      const {data} = await axios.delete(
+        `/api/users/${userId}/groups/${groupId}`
+      )
       dispatch(removeGroup(data))
     } catch (err) {
       console.error(err)
