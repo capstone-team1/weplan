@@ -15,7 +15,6 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:userId', async (req, res, next) => {
-  console.log(req.user)
   try {
     if (req.user === req.params.userId) {
       let id = req.params.userId
@@ -96,7 +95,6 @@ router.post('/:userId/events', async (req, res, next) => {
   }
 })
 
-
 router.delete('/:userId/events/:eventId', async (req, res, next) => {
   try {
     if (req.user) {
@@ -109,6 +107,10 @@ router.delete('/:userId/events/:eventId', async (req, res, next) => {
         ? res.send('you have deleted successfully')
         : res.send('this has already been deleted in the past')
     }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.delete('/:userId/groups/:groupId', async (req, res, next) => {
   try {
@@ -116,7 +118,6 @@ router.delete('/:userId/groups/:groupId', async (req, res, next) => {
 
     await curGroup.destroy()
     res.send(curGroup)
-
   } catch (err) {
     next(err)
   }
