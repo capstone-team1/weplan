@@ -4,11 +4,12 @@ import fetchAllEvents from '../store/event'
 import EventCard from './EventCard'
 
 class AllEvents extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     let groupId = this.props.groupId
-    this.props.getAllEvents(groupId)
+    await this.props.getAllEvents(groupId)
   }
   render() {
+    console.log(this.props)
     const {events} = this.props
     return (
       <div id="all-events">

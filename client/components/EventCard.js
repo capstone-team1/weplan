@@ -4,10 +4,10 @@ const EventCard = props => {
   const {event} = props
   return (
     <div id="eventCard" key={event.id}>
-      <p id="name">{event.name}</p>
-      <p id="description">{event.description}</p>
-      <p id="location">{event.location}</p>
-      <p id="upvotes">{event.upvotes}</p>
+      <p id="name">Event: {event.name}</p>
+      <p id="description">Description: {event.description}</p>
+      <p id="location">Location: {event.location}</p>
+      <p id="upvotes">Votes: {event.upvotes}</p>
     </div>
   )
 }
