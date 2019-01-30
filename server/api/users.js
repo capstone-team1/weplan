@@ -53,18 +53,6 @@ router.get('/:userId/groups', async (req, res, next) => {
   }
 })
 
-//request for single group by id
-router.get('/:userId/groups/:groupId', async (req, res, next) => {
-  if (req.user && req.user.id === Number(req.params.userId)) {
-    try {
-      const result = await Group.findById(req.params.groupId)
-      res.json(result)
-    } catch (err) {
-      next(err)
-    }
-  }
-})
-
 router.post('/:userId/groups', async (req, res, next) => {
   if (req.user && req.user.id === Number(req.params.userId)) {
     try {
@@ -80,6 +68,27 @@ router.post('/:userId/groups', async (req, res, next) => {
     } catch (err) {
       next(err)
     }
+  }
+})
+
+router.get('/:userId/groups/:groupId', async (req, res, next) => {
+  if (req.user && req.user.id === Number(req.params.userId)) {
+    try {
+      const result = await Group.findById(req.params.groupId)
+      res.json(result)
+    } catch (err) {
+      next(err)
+    }
+  }
+})
+
+router.get('/:userId/groups/:groupId/events', async (req, res, next) => {
+  try {
+    let id = req.params.groupId
+    const events = await Events.findAll({where: {groupId: id}})
+    res.json(events)
+  } catch (err) {
+    next(err)
   }
 })
 

@@ -4,9 +4,10 @@ import fetchAllEvents from '../store/event'
 import EventCard from './EventCard'
 
 class AllEvents extends Component {
-  componentDidMount() {
+  async componentDidMount() {
+    let userId = this.props.userId
     let groupId = this.props.groupId
-    this.props.getAllEvents(groupId)
+    await this.props.fetchAllEvents(userId, groupId)
   }
   render() {
     const {events} = this.props
@@ -25,13 +26,16 @@ class AllEvents extends Component {
 
 const mapStateToProps = state => {
   return {
-    events: state.events
+    events: state.event.events,
+    userId: state.user.id,
+    groupId: state.groupReducer.group.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getAllEvents: groupId => dispatch(fetchAllEvents(groupId))
+    fetchAllEvents: (userId, groupId) =>
+      dispatch(fetchAllEvents(userId, groupId))
   }
 }
 

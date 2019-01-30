@@ -17,9 +17,9 @@ const gotEvents = events => ({
   events
 })
 
-const gotEvent = singleEvent => ({
+const gotEvent = event => ({
   type: GET_SINGLE_EVENT,
-  singleEvent
+  event
 })
 
 const setEvent = event => {
@@ -39,29 +39,24 @@ const deleteEvent = event => {
  * THUNK CREATORS
  */
 
-//needs changing
 export const fetchAllEvents = (userId, groupId) => async dispatch => {
-  const {data} = await axios.get(`/api/users/${userId}/`)
-  const events = data
-  const action = gotEvents(events)
-  dispatch(action)
+  const {data} = await axios.get(
+    `/api/users/${userId}/groups/${groupId}/events`
+  )
+  dispatch(gotEvents(data))
 }
 
 export const fetchSingleEvent = (userId, eventId) => async dispatch => {
-  const event = await axios.get(`/api/users/${userId}/events/${eventId}/`)
-  const action = gotEvent(event)
-  dispatch(action)
+  const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
+  dispatch(gotEvent(event))
 }
 
-//CG: Call this createEvent
 export const createEvent = (userId, event) => async dispatch => {
   try {
     const {data} = await axios.post(`/api/users/${userId}/events`, event)
-    const newEvent = data
-    const action = setEvent(newEvent)
-    dispatch(action)
-  } catch (error) {
-    console.error(error)
+    dispatch(setEvent(data))
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -78,7 +73,7 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
 //Initial State
 const initialState = {
   events: [],
-  singleEvent: {}
+  event: {}
 }
 
 /**
@@ -103,8 +98,7 @@ export default function(state = initialState, action) {
             return event.id !== action.event.id
           })
         ],
-        singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
+        singleEvent: state.event.id !== action.event.id ? state.event : {}
       }
     default:
       return state

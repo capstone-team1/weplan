@@ -36,7 +36,6 @@ const removeGroup = group => ({
  * THUNK CREATORS
  */
 
-//needs changing
 export const fetchAllGroups = userId => async dispatch => {
   try {
     const {data} = await axios.get(`/api/users/${userId}/groups`)
