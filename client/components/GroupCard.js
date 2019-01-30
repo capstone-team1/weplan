@@ -4,8 +4,6 @@ import {Grid, Row, Col, ListGroup, Button} from 'react-bootstrap'
 import {removeSingleGroup} from '../store/index'
 
 const GroupCard = props => {
-  console.log('group props', props)
-
   return (
     <Grid fluid>
       <Row>
