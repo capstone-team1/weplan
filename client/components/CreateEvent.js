@@ -45,7 +45,7 @@ class CreateEvent extends Component {
           id="eventDescription"
           type="text"
           name="description"
-          value={this.state.decription}
+          value={this.state.description}
           placeholder="Enter description"
         />
         <input
@@ -63,8 +63,7 @@ class CreateEvent extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createOneEvent: (userId, newEvent) =>
-      dispatch(createEvent(userId, newEvent))
+    createEvent: (userId, newEvent) => dispatch(createEvent(userId, newEvent))
   }
 }
 

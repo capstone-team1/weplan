@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import fetchAllEvents from '../store/event'
+import {fetchAllEvents} from '../store/event'
 import EventCard from './EventCard'
 
 class AllEvents extends Component {
@@ -27,16 +27,12 @@ class AllEvents extends Component {
 const mapStateToProps = state => {
   return {
     events: state.event.events,
-    userId: state.user.id,
-    groupId: state.groupReducer.group.id
+    userId: state.user.id
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchAllEvents: (userId, groupId) =>
-      dispatch(fetchAllEvents(userId, groupId))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  fetchAllEvents: (userId, groupId) => dispatch(fetchAllEvents(userId, groupId))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllEvents)

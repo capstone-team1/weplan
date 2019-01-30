@@ -1,18 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {AllEvents} from './index'
+import {AllEvents, CreateEvent} from './index'
 import {fetchSingleGroup} from '../store/index'
 
 class SingleGroup extends Component {
-  async componentDidMount() {
-    let userId = this.props.userId
-    let groupId = this.props.groupId
-    await this.props.fetchSingleGroup(userId, groupId)
-  }
   render() {
     return (
       <div>
-        <AllEvents groupId={this.props.groupId} />
+        <div>
+          <AllEvents groupId={this.props.match.params.groupId} />
+        </div>
+        <div>
+          <h3>Create an Event!</h3>
+          <CreateEvent />
+        </div>
       </div>
     )
   }
