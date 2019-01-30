@@ -4,15 +4,10 @@ import {AllEvents} from './index'
 import {fetchSingleGroup} from '../store/index'
 
 class SingleGroup extends Component {
-  async componentDidMount() {
-    let userId = this.props.userId
-    let groupId = this.props.groupId
-    await this.props.fetchSingleGroup(userId, groupId)
-  }
   render() {
     return (
       <div>
-        <AllEvents groupId={this.props.groupId} />
+        <AllEvents groupId={this.props.match.params.groupId} />
       </div>
     )
   }

@@ -47,7 +47,8 @@ export const fetchAllGroups = userId => async dispatch => {
 
 export const fetchSingleGroup = (userId, groupId) => async dispatch => {
   try {
-    const {data} = await axios.get(`api/users/${userId}/groups/${groupId}`)
+    console.log('BEEP BEEP', userId, groupId)
+    const {data} = await axios.get(`/api/users/${userId}/groups/${groupId}`)
     dispatch(gotSingleGroup(data))
   } catch (err) {
     console.error(err)

@@ -82,9 +82,9 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
-      return {...state, events: action.event}
+      return {...state, events: action.events}
     case GET_SINGLE_EVENT:
-      return {...state, singleEvent: action.singleEvent}
+      return {...state, event: action.event}
     case SET_EVENT:
       return {
         ...state,

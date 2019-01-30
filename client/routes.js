@@ -26,7 +26,7 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
             <Route path="/groups" component={UserGroups} />
-            <Route path="/group" component={SingleGroup} />
+            <Route path="/group/:groupId" component={SingleGroup} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
