@@ -10,7 +10,6 @@ class UserGroups extends Component {
     await this.props.fetchAllGroups(userId)
   }
   render() {
-    console.log(this.props, 'asdas')
     let groups = this.props.groups
     return (
       <div>
@@ -18,7 +17,7 @@ class UserGroups extends Component {
           {groups.map(({id, name, description}) => {
             return (
               <Link to={`/users/${this.props.id}/groups/${id}`} key={name}>
-                <GroupCard name={name} description={description} />
+                <GroupCard name={name} description={description} groupId={id} />
               </Link>
             )
           })}
