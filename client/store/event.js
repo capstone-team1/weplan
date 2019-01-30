@@ -6,6 +6,7 @@ import axios from 'axios'
 const GET_EVENTS = 'GET_EVENTS'
 const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
+const DELETE_EVENT = 'DELETE_EVENT'
 
 /**
  * ACTION CREATORS
@@ -24,6 +25,13 @@ const gotEvent = singleEvent => ({
 const setEvent = event => {
   return {
     type: SET_EVENT,
+    event
+  }
+}
+
+const deleteEvent = event => {
+  return {
+    type: DELETE_EVENT,
     event
   }
 }
@@ -57,6 +65,16 @@ export const createEvent = (userId, event) => async dispatch => {
   }
 }
 
+export const deleteSingleEvent = (userId, eventId) => async dispatch => {
+  try {
+    const event = await axios.delete(`/api/users/${userId}/events/${eventId}/`)
+    const action = deleteEvent(event)
+    dispatch(action)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 //Initial State
 const initialState = {
   events: [],
@@ -76,6 +94,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         events: action.event
+      }
+    case DELETE_EVENT:
+      return {
+        ...state,
+        events: [
+          ...state.events.filter(event => {
+            return event.id !== action.event.id
+          })
+        ],
+        singleEvent:
+          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
       }
     default:
       return state
