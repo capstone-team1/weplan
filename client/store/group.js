@@ -70,7 +70,7 @@ export const removeSingleGroup = (groupId, userId) => {
       const {data} = await axios.delete(`/${userId}/groups/${groupId}`)
       dispatch(removeGroup(data))
     } catch (err) {
-      console.lerror(err)
+      console.error(err)
     }
   }
 }
