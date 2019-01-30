@@ -92,3 +92,14 @@ router.post('/:userId/events', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:userId/groups/:groupId', async (req, res, next) => {
+  try {
+    let curGroup = await Group.findById(req.params.groupId)
+
+    await curGroup.destroy()
+    res.send(curGroup)
+  } catch (err) {
+    next(err)
+  }
+})
