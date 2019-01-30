@@ -1,20 +1,23 @@
 import React from 'react'
-import {Grid, Row, Col} from 'react-bootstrap'
+import {Grid, Row, Col, ListGroup} from 'react-bootstrap'
 
 const GroupCard = props => {
   return (
-    <>
-      <Grid fluid>
-        <Row>
+    <Grid fluid>
+      <Row>
+        <ListGroup as="ul">
           <Col md={2} xs={2}>
-            <h3>Name: {props.name}</h3>
+            <h3>Name:</h3>
+            <h2>{props.name}</h2>
           </Col>
+
           <Col md={2} xs={2}>
-            <h3>Description: {props.description}</h3>
+            <h3>Description:</h3>
+            <h2>{props.description}</h2>
           </Col>
-        </Row>
-      </Grid>
-    </>
+        </ListGroup>
+      </Row>
+    </Grid>
   )
 }
 
