@@ -88,7 +88,7 @@ export default function(state = initialState, action) {
     case SET_EVENT:
       return {
         ...state,
-        events: action.event
+        events: [...state.events, action.event]
       }
     case DELETE_EVENT:
       return {
