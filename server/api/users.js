@@ -15,6 +15,7 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:userId', async (req, res, next) => {
+  console.log(req.user)
   try {
     if (req.user === req.params.userId) {
       let id = req.params.userId
@@ -37,6 +38,8 @@ router.get('/:userId', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.use('/groups', require('./groups'))
 
 router.get('/:userId/groups', async (req, res, next) => {
   try {
@@ -93,12 +96,27 @@ router.post('/:userId/events', async (req, res, next) => {
   }
 })
 
+
+router.delete('/:userId/events/:eventId', async (req, res, next) => {
+  try {
+    if (req.user) {
+      const deletedEvent = await Events.destroy({
+        where: {
+          id: req.params.eventId
+        }
+      })
+      deletedEvent
+        ? res.send('you have deleted successfully')
+        : res.send('this has already been deleted in the past')
+    }
+
 router.delete('/:userId/groups/:groupId', async (req, res, next) => {
   try {
     let curGroup = await Group.findById(req.params.groupId)
 
     await curGroup.destroy()
     res.send(curGroup)
+
   } catch (err) {
     next(err)
   }
