@@ -81,7 +81,7 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
 router.put('/:userId/events/:eventId', async (req, res, next) => {
   try {
     const event = Event.findById(req.params.eventId)
-    const array = await event.update(
+    const updateArr = await event.update(
       {
         votes: event.votes + req.body.vote //req.body.vote will either be 1 or -1
       },
@@ -89,19 +89,10 @@ router.put('/:userId/events/:eventId', async (req, res, next) => {
         returning: true
       }
     )
-    res.json(array[1][0]) // Model.update "returns a promise for an array.
+    res.json(updateArr[1][0]) // Model.update "returns a promise for an array.
     // The first element of the array is the number of rows that were affected.
     // The second element of the array is the affected rows themselves."
     // - https://github.com/tmkelly28/sequelize-reference
-  } catch (err) {
-    next(err)
-  }
-})
-
-router.put('/:userId/events/:eventId', async (req, res, next) => {
-  try {
-    const event = await Events.findById(req.params.eventId)
-    res.json(event)
   } catch (err) {
     next(err)
   }
