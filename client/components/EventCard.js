@@ -4,20 +4,21 @@ import {connect} from 'react-redux'
 import {changeEventVote} from '../store'
 
 const EventCard = props => {
-  const {event} = props
+  const activity = props.activity
+  console.log(props)
 
   return (
-    <div id="eventCard" key={event.id}>
-      <p id="name">{event.name}</p>
-      <p id="description">{event.description}</p>
-      <p id="location">{event.location}</p>
-      <p id="upvotes">{event.upvotes}</p>
-      <Button onClick={() => props.changeEventVote(props.userId, event.id, 1)}>
+    <div id="eventCard" key={activity.id}>
+      <p id="name">{activity.name}</p>
+      <p id="description">{activity.description}</p>
+      <p id="location">{activity.location}</p>
+      <p id="upvotes">{activity.upvotes}</p>
+      <Button onClick={() => props.changeVote(props.userId, activity.id, 1)}>
         Upvote
       </Button>
       <Button
         bsStyle="warning"
-        onClick={() => props.changeEventVote(props.userId, event.id, -1)}
+        onClick={() => props.changeVote(props.userId, activity.id, -1)}
       >
         Downvote
       </Button>
@@ -32,7 +33,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeEventVote: (userId, eventId, vote) =>
+  changeVote: (userId, eventId, vote) =>
     dispatch(changeEventVote(userId, eventId, vote))
 })
 
