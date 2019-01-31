@@ -204,14 +204,15 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
   }
 })
 
-router.get('/:groupId/events/:eventId', async (req, res, next) => {
-  const groupId = req.params.groupId
+router.get('/:groupId/events', async (req, res, next) => {
+  const groupId = Number(req.params.groupId)
   const eventId = req.params.eventId
   try {
     const topEvent = await Events.max('votes', {
       where: {groupId: groupId}
     })
-    res.json(topEvent)
+    const bestEvent = await Events.findAll({where: {votes: topEvent}})
+    res.json(bestEvent)
   } catch (err) {
     next(err)
   }
