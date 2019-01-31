@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {runInNewContext} from 'vm'
 
 /**
  * ACTION TYPES
@@ -8,6 +9,7 @@ const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
 const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
+const DECIDE_EVENT = 'DECIDE_EVENT'
 
 /**
  * ACTION CREATORS
@@ -44,6 +46,13 @@ const updateEventVote = event => {
   }
 }
 
+const choseEvent = event => {
+  return {
+    type: DECIDE_EVENT,
+    event
+  }
+}
+
 /**
  * THUNK CREATORS
  */
@@ -77,10 +86,11 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
     const event = await axios.delete(`/api/users/${userId}/events/${eventId}/`)
     const action = deleteEvent(event)
     dispatch(action)
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
   }
 }
+
 export const changeEventVote = (userId, eventId, vote) => async dispatch => {
   try {
     const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
@@ -89,8 +99,16 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
 
     const action = updateEventVote(event)
     dispatch(action)
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const decideEvent = groupId => async dispatch => {
+  try {
+    const group = await axios.put(`/api/users/:groupId/decideEvent/`)
+  } catch (err) {
+    console.error(err)
   }
 }
 

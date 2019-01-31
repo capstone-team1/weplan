@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchAllEvents, finalizeVote} from '../store/event'
+import {fetchAllEvents, decideEvent} from '../store/event'
 import EventCard from './EventCard'
 import {Button} from 'react-bootstrap'
 
@@ -14,7 +14,7 @@ class AllEvents extends Component {
   handleClick() {
     //maybe async, maybe put constructor and bind this inside it
     let groupId = this.props.groupId
-    this.props.finalizeVote(groupId)
+    this.props.decideEvent(groupId)
   }
 
   render() {
@@ -33,7 +33,9 @@ class AllEvents extends Component {
             )
           })}
         </div>
-        <Button onClick={this.handleClick}>Finalize Event</Button>
+        <br />
+        <br />
+        <Button onClick={this.handleClick}>Decide Event</Button>
       </div>
     )
   }
@@ -49,7 +51,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   fetchAllEvents: (userId, groupId) =>
     dispatch(fetchAllEvents(userId, groupId)),
-  finalizeVote: groupId => dispatch(finalizeVote(groupId))
+  decideEvent: groupId => dispatch(decideEvent(groupId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllEvents)
