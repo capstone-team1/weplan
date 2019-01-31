@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import axios from 'axios'
 
 /**
@@ -8,6 +9,7 @@ const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
 const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
+const DECIDE_EVENTS = 'DECIDE_EVENTS'
 
 /**
  * ACTION CREATORS
@@ -30,10 +32,10 @@ const setEvent = event => {
   }
 }
 
-const deleteEvent = event => {
+const deleteEvent = eventId => {
   return {
     type: DELETE_EVENT,
-    event
+    eventId
   }
 }
 
@@ -41,6 +43,13 @@ const updateEventVote = event => {
   return {
     type: UPDATE_EVENT_VOTE,
     event: event.data
+  }
+}
+
+const choseEvent = decideEvents => {
+  return {
+    type: DECIDE_EVENTS,
+    decideEvents
   }
 }
 
@@ -74,13 +83,14 @@ export const createEvent = (userId, groupId, event) => async dispatch => {
 
 export const deleteSingleEvent = (userId, eventId) => async dispatch => {
   try {
-    const event = await axios.delete(`/api/users/${userId}/events/${eventId}/`)
-    const action = deleteEvent(event)
+    await axios.delete(`/api/users/${userId}/events/${eventId}/`)
+    const action = deleteEvent(eventId)
     dispatch(action)
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
   }
 }
+
 export const changeEventVote = (userId, eventId, vote) => async dispatch => {
   try {
     const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
@@ -89,8 +99,17 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
 
     const action = updateEventVote(event)
     dispatch(action)
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const decideEvent = groupId => async dispatch => {
+  try {
+    const {data} = await axios.put(`/api/users/${groupId}/decideEvent`)
+    dispatch(choseEvent(data))
+  } catch (err) {
+    console.error(err)
   }
 }
 
@@ -119,11 +138,11 @@ export default function(state = initialState, action) {
         ...state,
         events: [
           ...state.events.filter(event => {
-            return event.id !== action.event.id
+            return event.id !== action.eventId
           })
         ],
         singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
+          state.singleEvent.id !== action.eventId ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       return {
@@ -137,6 +156,11 @@ export default function(state = initialState, action) {
         ],
         singleEvent:
           state.singleEvent.id !== action.event.id ? state.singleEvent : event
+      }
+    case DECIDE_EVENTS:
+      return {
+        ...state,
+        events: action.decideEvents
       }
     default:
       return state
