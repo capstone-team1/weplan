@@ -221,3 +221,12 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/groups/all', async (req, res, next) => {
+  try {
+    const allGroups = await Group.findAll()
+    res.json(allGroups)
+  } catch (err) {
+    next(err)
+  }
+})
