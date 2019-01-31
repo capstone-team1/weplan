@@ -93,7 +93,7 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
 //Initial State
 const initialState = {
   events: [],
-  event: {}
+  singleEvent: {}
 }
 
 /**
@@ -104,7 +104,7 @@ export default function(state = initialState, action) {
     case GET_EVENTS:
       return {...state, events: action.events}
     case GET_SINGLE_EVENT:
-      return {...state, event: action.event}
+      return {...state, singleEvent: action.event}
     case SET_EVENT:
       return {
         ...state,
@@ -118,7 +118,8 @@ export default function(state = initialState, action) {
             return event.id !== action.event.id
           })
         ],
-        singleEvent: state.event.id !== action.event.id ? state.event : {}
+        singleEvent:
+          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       return {
