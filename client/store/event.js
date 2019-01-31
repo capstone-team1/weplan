@@ -119,6 +119,7 @@ const initialState = {
   singleEvent: {}
 }
 
+let idx
 /**
  * REDUCER
  */
@@ -145,14 +146,17 @@ export default function(state = initialState, action) {
           state.singleEvent.id !== action.eventId ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
+      idx = state.events.indexOf(
+        ...state.events.filter(el => {
+          return el.id === action.event.id
+        })
+      )
       return {
         ...state,
         events: [
-          ...state.events
-            .filter(event => {
-              return event.id !== action.event.id
-            })
-            .concat(action.event)
+          ...state.events.slice(0, idx),
+          action.event,
+          ...state.events.slice(idx + 1)
         ],
         singleEvent:
           state.singleEvent.id !== action.event.id ? state.singleEvent : event
