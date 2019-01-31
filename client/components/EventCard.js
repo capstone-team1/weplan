@@ -12,14 +12,12 @@ const EventCard = props => {
       <p id="description">{event.description}</p>
       <p id="location">{event.location}</p>
       <p id="upvotes">{event.upvotes}</p>
-      <Button
-        onClick={() => props.changeEventVote(props.userId, event.groupId, 1)}
-      >
+      <Button onClick={() => props.changeEventVote(props.userId, event.id, 1)}>
         Upvote
       </Button>
       <Button
         bsStyle="warning"
-        onClick={() => props.changeEventVote(props.userId, event.groupId, -1)}
+        onClick={() => props.changeEventVote(props.userId, event.id, -1)}
       >
         Downvote
       </Button>
