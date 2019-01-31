@@ -1,5 +1,5 @@
+/* eslint-disable complexity */
 import axios from 'axios'
-import {runInNewContext} from 'vm'
 
 /**
  * ACTION TYPES
@@ -9,7 +9,7 @@ const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
 const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
-const DECIDE_EVENT = 'DECIDE_EVENT'
+const DECIDE_EVENTS = 'DECIDE_EVENTS'
 
 /**
  * ACTION CREATORS
@@ -46,10 +46,10 @@ const updateEventVote = event => {
   }
 }
 
-const choseEvent = event => {
+const choseEvent = decideEvents => {
   return {
-    type: DECIDE_EVENT,
-    event
+    type: DECIDE_EVENTS,
+    decideEvents
   }
 }
 
@@ -106,7 +106,8 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
 
 export const decideEvent = groupId => async dispatch => {
   try {
-    const group = await axios.put(`/api/users/:groupId/decideEvent/`)
+    const {data} = await axios.put(`/api/users/${groupId}/decideEvent`)
+    dispatch(choseEvent(data))
   } catch (err) {
     console.error(err)
   }
@@ -155,6 +156,11 @@ export default function(state = initialState, action) {
         ],
         singleEvent:
           state.singleEvent.id !== action.event.id ? state.singleEvent : event
+      }
+    case DECIDE_EVENTS:
+      return {
+        ...state,
+        events: action.decideEvents
       }
     default:
       return state

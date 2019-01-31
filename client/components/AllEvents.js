@@ -5,14 +5,18 @@ import EventCard from './EventCard'
 import {Button} from 'react-bootstrap'
 
 class AllEvents extends Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   async componentDidMount() {
     let userId = this.props.userId
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)
+    console.log(this.props)
   }
 
   handleClick() {
-    //maybe async, maybe put constructor and bind this inside it
     let groupId = this.props.groupId
     this.props.decideEvent(groupId)
   }
