@@ -186,6 +186,7 @@ router.delete('/:userId/groups/:groupId', async (req, res, next) => {
   }
 })
 
+//route for Join Group button on the front end. this route associates a user to a group
 router.put('/:userId/groups/:groupId', async (req, res, next) => {
   try {
     const userId = Number(req.params.userId)
@@ -199,6 +200,19 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
 
     res.send('User has joined the group successfully!')
   } catch (err) {
-    console.log(err)
+    next(err)
+  }
+})
+
+router.get('/:groupId/events/:eventId', async (req, res, next) => {
+  const groupId = req.params.groupId
+  const eventId = req.params.eventId
+  try {
+    const topEvent = await Events.max('votes', {
+      where: {groupId: groupId}
+    })
+    res.json(topEvent)
+  } catch (err) {
+    next(err)
   }
 })
