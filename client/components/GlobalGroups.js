@@ -6,7 +6,7 @@ import {CreateGroup, GroupCard} from './index'
 
 class GlobalGroups extends Component {
   async componentDidMount() {
-    await this.props.fetchGlobalGroups
+    await this.props.fetchGlobalGroups()
   }
   render() {
     let groups = this.props.groups

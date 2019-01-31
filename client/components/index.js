@@ -13,3 +13,5 @@ export {default as EventCard} from './EventCard'
 export {default as CreateEvent} from './CreateEvent'
 export {default as CreateGroup} from './CreateGroup'
 export {default as SingleGroup} from './SingleGroup'
+
+export {default as GlobalGroups} from './GlobalGroups'
