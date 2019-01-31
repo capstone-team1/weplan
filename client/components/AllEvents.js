@@ -1,14 +1,24 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchAllEvents, deleteSingleEvent} from '../store/event'
+import {fetchAllEvents, deleteSingleEvent, decideEvent} from '../store/event'
 import EventCard from './EventCard'
 import {Button} from 'react-bootstrap'
 
 class AllEvents extends Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   async componentDidMount() {
     let userId = this.props.userId
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)
+    console.log(this.props)
+  }
+
+  handleClick() {
+    let groupId = this.props.groupId
+    this.props.decideEvent(groupId)
   }
 
   render() {
@@ -36,6 +46,9 @@ class AllEvents extends Component {
             )
           })}
         </div>
+        <br />
+        <br />
+        <Button onClick={this.handleClick}>Decide Event</Button>
       </div>
     )
   }
@@ -51,7 +64,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   deleteEvent: (userId, eventId) =>
     dispatch(deleteSingleEvent(userId, eventId)),
-  fetchAllEvents: (userId, groupId) => dispatch(fetchAllEvents(userId, groupId))
+
+  fetchAllEvents: (userId, groupId) => 
+    dispatch(fetchAllEvents(userId, groupId)),
+
+  decideEvent: groupId => 
+    dispatch(decideEvent(groupId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllEvents)
