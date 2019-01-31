@@ -54,7 +54,7 @@ export const fetchAllGroups = userId => async dispatch => {
 
 export const fetchGlobalGroups = () => async dispatch => {
   try {
-    const {data} = await axios.get(`/api/users/allGroups`)
+    const {data} = await axios.get(`/api/users/groups/all`)
     dispatch(gotGlobalGroup(data))
   } catch (err) {
     console.error(err)
