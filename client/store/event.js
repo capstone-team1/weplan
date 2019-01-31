@@ -60,9 +60,12 @@ export const fetchSingleEvent = (userId, eventId) => async dispatch => {
   dispatch(gotEvent(event))
 }
 
-export const createEvent = (userId, event) => async dispatch => {
+export const createEvent = (userId, groupId, event) => async dispatch => {
   try {
-    const {data} = await axios.post(`/api/users/${userId}/events`, event)
+    const {data} = await axios.post(
+      `/api/users/${userId}/groups/${groupId}/events`,
+      event
+    )
     dispatch(setEvent(data))
   } catch (err) {
     console.error(err)

@@ -16,13 +16,9 @@ class AllEvents extends Component {
       <div id="all-events">
         <h3>Let the Hunger Games begin!</h3>
         <div>
-          {events.map(event => {
+          {events.map((event, i) => {
             return (
-              <EventCard
-                event={event}
-                key={event.id}
-                userId={this.props.userId}
-              />
+              <EventCard event={event} key={i} userId={this.props.userId} />
             )
           })}
         </div>

@@ -24,7 +24,8 @@ class CreateEvent extends Component {
   handleSubmit(event) {
     event.preventDefault()
     let userId = this.props.userId
-    this.props.createEvent(userId, this.state)
+    let groupId = this.props.groupId
+    this.props.createEvent(userId, groupId, this.state)
     this.setState({
       name: '',
       description: '',
@@ -63,7 +64,8 @@ class CreateEvent extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    createEvent: (userId, newEvent) => dispatch(createEvent(userId, newEvent))
+    createEvent: (userId, groupId, event) =>
+      dispatch(createEvent(userId, groupId, event))
   }
 }
 

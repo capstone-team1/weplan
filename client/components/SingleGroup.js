@@ -12,7 +12,10 @@ class SingleGroup extends Component {
         </div>
         <div>
           <h3>Create an Event!</h3>
-          <CreateEvent />
+          <CreateEvent
+            userId={this.props.userId}
+            groupId={this.props.match.params.groupId}
+          />
         </div>
       </div>
     )
