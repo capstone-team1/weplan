@@ -12,7 +12,7 @@ const EventCard = props => {
       <p id="name">{activity.name}</p>
       <p id="description">{activity.description}</p>
       <p id="location">{activity.location}</p>
-      <p id="upvotes">{activity.upvotes}</p>
+      <p id="upvotes">Votes: {activity.votes}</p>
       <Button onClick={() => props.changeVote(props.userId, activity.id, 1)}>
         Upvote
       </Button>
