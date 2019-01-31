@@ -132,7 +132,7 @@ router.put('/:userId/events/:eventId', async (req, res, next) => {
       },
       {
         returning: true,
-        where: {id: req.params.userId}
+        where: {id: req.params.eventId}
       }
     )
     res.json(updateArr[1][0]) // Model.update "returns a promise for an array.
@@ -183,5 +183,22 @@ router.delete('/:userId/groups/:groupId', async (req, res, next) => {
     res.send(curGroup)
   } catch (err) {
     next(err)
+  }
+})
+
+router.put('/:userId/groups/:groupId', async (req, res, next) => {
+  try {
+    const userId = Number(req.params.userId)
+    const groupId = Number(req.params.groupId)
+
+    const currentGroup = await Group.findById(groupId)
+    console.log('this is the group retrieved', currentGroup)
+    const currentUser = await User.findById(userId)
+
+    await currentGroup.addUser(currentUser)
+
+    res.send('User has joined the group successfully!')
+  } catch (err) {
+    console.log(err)
   }
 })

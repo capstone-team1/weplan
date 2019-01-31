@@ -40,7 +40,7 @@ const deleteEvent = event => {
 const updateEventVote = event => {
   return {
     type: UPDATE_EVENT_VOTE,
-    event
+    event: event.data
   }
 }
 
@@ -86,6 +86,7 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
     const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
       vote
     })
+
     const action = updateEventVote(event)
     dispatch(action)
   } catch (error) {
@@ -96,7 +97,7 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
 //Initial State
 const initialState = {
   events: [],
-  event: {}
+  singleEvent: {}
 }
 
 /**
@@ -107,7 +108,7 @@ export default function(state = initialState, action) {
     case GET_EVENTS:
       return {...state, events: action.events}
     case GET_SINGLE_EVENT:
-      return {...state, event: action.event}
+      return {...state, singleEvent: action.event}
     case SET_EVENT:
       return {
         ...state,
@@ -121,7 +122,8 @@ export default function(state = initialState, action) {
             return event.id !== action.event.id
           })
         ],
-        singleEvent: state.event.id !== action.event.id ? state.event : {}
+        singleEvent:
+          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       return {
@@ -131,7 +133,7 @@ export default function(state = initialState, action) {
             .filter(event => {
               return event.id !== action.event.id
             })
-            .concat(event)
+            .concat(action.event)
         ],
         singleEvent:
           state.singleEvent.id !== action.event.id ? state.singleEvent : event
