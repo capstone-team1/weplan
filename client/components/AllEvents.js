@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchAllEvents} from '../store/event'
+import {fetchAllEvents, deleteSingleEvent} from '../store/event'
 import EventCard from './EventCard'
+import {Button} from 'react-bootstrap'
 
 class AllEvents extends Component {
   async componentDidMount() {
@@ -18,11 +19,20 @@ class AllEvents extends Component {
         <div>
           {events.map(activity => {
             return (
-              <EventCard
-                activity={activity}
-                key={activity.id}
-                userId={this.props.userId}
-              />
+              <>
+                <EventCard
+                  activity={activity}
+                  key={activity.id}
+                  userId={this.props.userId}
+                />
+                <Button
+                  onClick={() =>
+                    this.props.deleteEvent(this.props.userId, activity.id)
+                  }
+                >
+                  Delete
+                </Button>
+              </>
             )
           })}
         </div>
@@ -39,6 +49,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+  deleteEvent: (userId, eventId) =>
+    dispatch(deleteSingleEvent(userId, eventId)),
   fetchAllEvents: (userId, groupId) => dispatch(fetchAllEvents(userId, groupId))
 })
 
