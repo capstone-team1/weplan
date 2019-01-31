@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+//Get user info
 router.get('/:userId', async (req, res, next) => {
   try {
     if (req.user === req.params.userId) {
@@ -38,8 +39,7 @@ router.get('/:userId', async (req, res, next) => {
   }
 })
 
-// router.use('/groups', require('./groups'))
-
+//Get groups a user is a member of
 router.get('/:userId/groups', async (req, res, next) => {
   try {
     if (req.user) {
@@ -53,6 +53,7 @@ router.get('/:userId/groups', async (req, res, next) => {
   }
 })
 
+//User creates group
 router.post('/:userId/groups', async (req, res, next) => {
   if (req.user && req.user.id === Number(req.params.userId)) {
     try {
@@ -71,6 +72,7 @@ router.post('/:userId/groups', async (req, res, next) => {
   }
 })
 
+//Single group
 router.get('/:userId/groups/:groupId', async (req, res, next) => {
   if (req.user && req.user.id === Number(req.params.userId)) {
     try {
@@ -82,6 +84,7 @@ router.get('/:userId/groups/:groupId', async (req, res, next) => {
   }
 })
 
+//All events of a single group
 router.get('/:userId/groups/:groupId/events', async (req, res, next) => {
   try {
     let id = req.params.groupId
@@ -92,6 +95,23 @@ router.get('/:userId/groups/:groupId/events', async (req, res, next) => {
   }
 })
 
+//Creating event
+router.post('/:userId/groups/:groupId/events', async (req, res, next) => {
+  try {
+    let id = Number(req.params.groupId)
+    const event = await Events.create({
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      groupId: id
+    })
+    res.json(event)
+  } catch (err) {
+    next(err)
+  }
+})
+
+//get all events for a user?
 router.get('/:userId/events/:eventId', async (req, res, next) => {
   try {
     const event = await Events.findById(req.params.eventId)
@@ -101,11 +121,11 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
   }
 })
 
+//updating an event by userid
 router.put('/:userId/events/:eventId', async (req, res, next) => {
   try {
     const event = await Events.findById(+req.params.eventId)
     const newVotes = event.votes + +req.body.vote
-    console.log(event)
     const updateArr = await Events.update(
       {
         votes: newVotes //req.body.vote will either be 1 or -1
@@ -159,7 +179,6 @@ router.delete('/:userId/events/:eventId', async (req, res, next) => {
 router.delete('/:userId/groups/:groupId', async (req, res, next) => {
   try {
     let curGroup = await Group.findById(req.params.groupId)
-
     await curGroup.destroy()
     res.send(curGroup)
   } catch (err) {
