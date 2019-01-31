@@ -32,10 +32,10 @@ const setEvent = event => {
   }
 }
 
-const deleteEvent = event => {
+const deleteEvent = eventId => {
   return {
     type: DELETE_EVENT,
-    event
+    eventId
   }
 }
 
@@ -83,8 +83,8 @@ export const createEvent = (userId, groupId, event) => async dispatch => {
 
 export const deleteSingleEvent = (userId, eventId) => async dispatch => {
   try {
-    const event = await axios.delete(`/api/users/${userId}/events/${eventId}/`)
-    const action = deleteEvent(event)
+    await axios.delete(`/api/users/${userId}/events/${eventId}/`)
+    const action = deleteEvent(eventId)
     dispatch(action)
   } catch (err) {
     console.error(err)
@@ -138,11 +138,11 @@ export default function(state = initialState, action) {
         ...state,
         events: [
           ...state.events.filter(event => {
-            return event.id !== action.event.id
+            return event.id !== action.eventId
           })
         ],
         singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : {}
+          state.singleEvent.id !== action.eventId ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       return {
