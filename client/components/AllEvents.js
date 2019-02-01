@@ -17,8 +17,12 @@ class AllEvents extends Component {
   }
 
   handleClick() {
-    let groupId = this.props.groupId
-    this.props.decideEvent(groupId)
+    setTimeout(() => {
+      let groupId = this.props.groupId
+      this.props.decideEvent(groupId)
+    }, 10000) //ten seconds = 10,000 milliseconds.
+    //we will make this choosable later but
+    //for development we will keep it short
   }
 
   render() {
@@ -48,7 +52,9 @@ class AllEvents extends Component {
         </div>
         <br />
         <br />
-        <Button onClick={this.handleClick}>Decide Event</Button>
+        <Button onClick={this.handleClick}>
+          Start Decider Countdown- 10 seconds
+        </Button>
       </div>
     )
   }
@@ -65,11 +71,10 @@ const mapDispatchToProps = dispatch => ({
   deleteEvent: (userId, eventId) =>
     dispatch(deleteSingleEvent(userId, eventId)),
 
-  fetchAllEvents: (userId, groupId) => 
+  fetchAllEvents: (userId, groupId) =>
     dispatch(fetchAllEvents(userId, groupId)),
 
-  decideEvent: groupId => 
-    dispatch(decideEvent(groupId))
+  decideEvent: groupId => dispatch(decideEvent(groupId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AllEvents)
