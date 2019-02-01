@@ -5,7 +5,6 @@ import {changeEventVote} from '../store'
 
 const EventCard = props => {
   const activity = props.activity
-  console.log(props)
 
   return (
     <div id="eventCard" key={activity.id}>
