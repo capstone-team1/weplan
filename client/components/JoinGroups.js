@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchGlobalGroups} from '../store/index'
-import {CreateGroup, GroupCard} from './index'
+import {GroupCard} from './index'
 
-class GlobalGroups extends Component {
+class JoinGroups extends Component {
   async componentDidMount() {
     await this.props.fetchGlobalGroups()
   }
@@ -21,9 +21,6 @@ class GlobalGroups extends Component {
             )
           })}
         </div>
-        <div>
-          <CreateGroup />
-        </div>
       </div>
     )
   }
@@ -38,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
   fetchGlobalGroups: () => dispatch(fetchGlobalGroups())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(GlobalGroups)
+export default connect(mapStateToProps, mapDispatchToProps)(JoinGroups)

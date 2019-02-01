@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Carousel} from 'react-bootstrap'
-import GlobalGroups from './GlobalGroups'
 
 /**
  * COMPONENT
@@ -13,8 +12,7 @@ export const UserHome = props => {
   return (
     <div>
       <h3>Welcome, {email}</h3>
-      <GlobalGroups />
-      {/* <Carousel interval={2000}>
+      <Carousel interval={2000}>
         <Carousel.Item>
           <img
             alt="300x300"
@@ -45,7 +43,7 @@ export const UserHome = props => {
             <p>Events Are Cooler</p>
           </Carousel.Caption>
         </Carousel.Item>
-      </Carousel> */}
+      </Carousel>
     </div>
   )
 }
