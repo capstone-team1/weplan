@@ -17,9 +17,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <Button>Home </Button>
           </NavLink>
 
-          <Link to="/groups">
-            <Button>Groups</Button>
+          <Link to="/join">
+            <Button>Join New Group</Button>
           </Link>
+
+          <Link to="/groups">
+            <Button>My Groups</Button>
+          </Link>
+
           <Button>
             <a href="#" onClick={handleClick}>
               Logout
