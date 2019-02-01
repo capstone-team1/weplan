@@ -1,5 +1,7 @@
 const router = require('express').Router()
 const {User, Group, Events} = require('../db/models')
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -207,13 +209,19 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
 router.put('/:groupId/decideEvent', async (req, res, next) => {
   const groupId = Number(req.params.groupId)
   try {
-    const topEvent = await Events.max('votes', {
+    const topVotesNum = await Events.max('votes', {
       where: {groupId: groupId}
     })
+
     const bestEvent = await Events.findAll({
       where: {
         groupId: groupId,
-        votes: topEvent
+        votes: topVotesNum
+      }
+    })
+    const deletedOldEvents = await Events.destroy({
+      where: {
+        id: {[Op.ne]: bestEvent[0].id}
       }
     })
     res.json(bestEvent)
