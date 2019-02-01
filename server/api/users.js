@@ -1,5 +1,11 @@
 const router = require('express').Router()
 const {User, Group, Events} = require('../db/models')
+const Sequelize = require('sequelize')
+const db = require('../db/db')
+
+const Op = Sequelize.Op
+const UserGroup = db.model('user_group')
+
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -222,10 +228,22 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
   }
 })
 
-router.get('/groups/all', async (req, res, next) => {
+router.get('/groups/join', async (req, res, next) => {
   try {
-    const allGroups = await Group.findAll()
-    res.json(allGroups)
+    let id = req.user.id
+    const joinGroups = await Group.findAll({
+      include: [
+        {
+          model: User,
+          where: {
+            id: {
+              $ne: id
+            }
+          }
+        }
+      ]
+    })
+    res.json(joinGroups)
   } catch (err) {
     next(err)
   }
