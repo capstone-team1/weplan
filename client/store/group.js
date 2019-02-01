@@ -8,10 +8,16 @@ const GET_SINGLE_GROUP = 'GET_SINGLE_GROUP'
 const SET_GROUP = 'SET_GROUP'
 const REMOVE_GROUP = 'REMOVE_GROUP'
 const GET_GLOBAL_GROUPS = 'GET_GLOBAL_GROUPS'
+const JOIN_GROUP = 'JOIN_GROUP'
 
 /**
  * ACTION CREATORS
  */
+
+const joinGroup = group => ({
+  type: JOIN_GROUP,
+  groupId: group.id
+})
 const gotGroups = groups => ({
   type: GET_GROUPS,
   groups
@@ -94,6 +100,17 @@ export const removeSingleGroup = (groupId, userId) => {
   }
 }
 
+export const joinIntoGroup = (userId, groupId) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/users/${userId}/groups/${groupId}`)
+      dispatch(joinGroup(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+}
+
 //Initial State
 const initialState = {
   groups: [],
@@ -118,6 +135,11 @@ export default function(state = initialState, action) {
       }
     case GET_GLOBAL_GROUPS:
       return {...state, groups: action.groups}
+    case JOIN_GROUP:
+      return {
+        ...state,
+        groups: state.groups.filter(group => group.id !== action.groupId)
+      }
     default:
       return state
   }
