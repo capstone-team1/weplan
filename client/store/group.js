@@ -39,6 +39,7 @@ const removeGroup = group => ({
   type: REMOVE_GROUP,
   groupId: group.id
 })
+
 /**
  * THUNK CREATORS
  */
