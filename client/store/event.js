@@ -125,8 +125,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
       return {...state, events: action.events}
-    case GET_SINGLE_EVENT:
-      return {...state, singleEvent: action.event}
+    // case GET_SINGLE_EVENT:
+    //   return {...state, singleEvent: action.event}
     case SET_EVENT:
       return {
         ...state,
@@ -139,9 +139,9 @@ export default function(state = initialState, action) {
           ...state.events.filter(event => {
             return event.id !== action.eventId
           })
-        ],
-        singleEvent:
-          state.singleEvent.id !== action.eventId ? state.singleEvent : {}
+        ]
+        // singleEvent:
+        //   state.singleEvent.id !== action.eventId ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       idx = state.events.indexOf(
