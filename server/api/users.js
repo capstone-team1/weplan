@@ -195,7 +195,6 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
     const groupId = Number(req.params.groupId)
 
     const currentGroup = await Group.findById(groupId)
-    console.log('this is the group retrieved', currentGroup)
     const currentUser = await User.findById(userId)
 
     await currentGroup.addUser(currentUser)

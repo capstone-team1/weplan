@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchGlobalGroups, joinIntoGroup} from '../store/index'
 import {Button} from 'react-bootstrap'
@@ -12,25 +11,20 @@ class JoinGroups extends Component {
 
   render() {
     let groups = this.props.groups
-    console.log(this.props)
     return (
       <div>
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <div key={name}>
-                <Link to={`/group/${id}`} key={name}>
-                  <GroupCard
-                    name={name}
-                    description={description}
-                    groupId={id}
-                  />
-                </Link>
-                <Button
-                  onClick={() => this.props.joinIntoGroup(this.props.id, id)}
-                >
-                  Join new group
-                </Button>
+              <div key={id}>
+                <GroupCard name={name} description={description} groupId={id} />
+                <div>
+                  <Button
+                    onClick={() => this.props.joinIntoGroup(this.props.id, id)}
+                  >
+                    Join new group
+                  </Button>
+                </div>
               </div>
             )
           })}

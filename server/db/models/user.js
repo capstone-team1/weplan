@@ -4,7 +4,6 @@ const db = require('../db')
 
 const User = db.define('user', {
   handle: {
-    //CG: So this allows duplicate usernames, especially with default value of guest.
     type: Sequelize.STRING,
     allowNull: true
     // defaultValue: () => {
