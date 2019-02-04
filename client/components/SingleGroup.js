@@ -10,10 +10,6 @@ class SingleGroup extends Component {
         <div>
           <AllEvents groupId={this.props.match.params.groupId} />
         </div>
-
-        <br />
-        <br />
-
         <div>
           <h3>Create an Event!</h3>
           <CreateEvent
