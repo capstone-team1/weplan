@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+
 import {connect} from 'react-redux'
-import {fetchAllGroups} from '../store/index'
+import {fetchAllGroups, removeSingleGroup} from '../store/index'
 import {CreateGroup, GroupCard} from './index'
-import {Segment} from 'semantic-ui-react'
+import {Segment, Button} from 'semantic-ui-react'
 
 class UserGroups extends Component {
   async componentDidMount() {
@@ -11,25 +11,20 @@ class UserGroups extends Component {
     await this.props.fetchAllGroups(userId)
   }
   render() {
-    let groups = this.props.groups
+    let {groups} = this.props
     return (
       <div>
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <Link to={`/group/${id}`} key={name}>
-                <Segment>
-                  <GroupCard
-                    name={name}
-                    description={description}
-                    groupId={id}
-                  />
-                </Segment>
-              </Link>
+              <Segment key={name}>
+                <GroupCard name={name} description={description} groupId={id} />
+              </Segment>
             )
           })}
         </div>
         <div>
+          <h3>Create A Group!</h3>
           <CreateGroup />
         </div>
       </div>
@@ -43,7 +38,9 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllGroups: userId => dispatch(fetchAllGroups(userId))
+  fetchAllGroups: userId => dispatch(fetchAllGroups(userId)),
+  removeSingleGroup: (groupId, userId) =>
+    dispatch(removeSingleGroup(groupId, userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserGroups)

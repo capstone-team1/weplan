@@ -195,7 +195,6 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
     const groupId = Number(req.params.groupId)
 
     const currentGroup = await Group.findById(groupId)
-    console.log('this is the group retrieved', currentGroup)
     const currentUser = await User.findById(userId)
 
     await currentGroup.addUser(currentUser)
@@ -232,14 +231,13 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
 
 router.get('/groups/join', async (req, res, next) => {
   try {
-    let id = req.user.id
     const joinGroups = await Group.findAll({
       include: [
         {
           model: User,
           where: {
             id: {
-              $ne: id
+              $ne: req.user.id
             }
           }
         }
