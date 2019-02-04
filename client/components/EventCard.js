@@ -29,10 +29,7 @@ const EventCard = props => {
         </List.Item>
         <List.Item>
           <Button as="div" labelPosition="right">
-            <Button
-              color="red"
-              onClick={() => props.changeVote(props.userId, activity.id, 1)}
-            >
+            <Button color="red" onClick={() => props.changeVote(activity.id)}>
               <Icon name="heart" />
               Vote
             </Button>
@@ -47,14 +44,14 @@ const EventCard = props => {
 }
 
 const mapStateToProps = state => {
+  //remove if works without userid etcetc
   return {
     userId: state.user.id
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  changeVote: (userId, eventId, vote) =>
-    dispatch(changeEventVote(userId, eventId, vote))
+  changeVote: eventId => dispatch(changeEventVote(eventId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventCard)

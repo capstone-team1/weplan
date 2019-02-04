@@ -5,7 +5,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_EVENTS = 'GET_EVENTS'
-const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
+// const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
 const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
@@ -20,10 +20,10 @@ const gotEvents = events => ({
   events
 })
 
-const gotEvent = event => ({
-  type: GET_SINGLE_EVENT,
-  event
-})
+// const gotEvent = event => ({
+//   type: GET_SINGLE_EVENT,
+//   event
+// })
 
 const setEvent = event => {
   return {
@@ -64,10 +64,10 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   dispatch(gotEvents(data))
 }
 
-export const fetchSingleEvent = (userId, eventId) => async dispatch => {
-  const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
-  dispatch(gotEvent(event))
-}
+// export const fetchSingleEvent = (userId, eventId) => async dispatch => {
+//   const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
+//   dispatch(gotEvent(event))
+// }
 
 export const createEvent = (userId, groupId, event) => async dispatch => {
   try {
@@ -91,11 +91,9 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
   }
 }
 
-export const changeEventVote = (userId, eventId, vote) => async dispatch => {
+export const changeEventVote = eventId => async dispatch => {
   try {
-    const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
-      vote
-    })
+    const event = await axios.put(`/events/${eventId}/vote`)
 
     const action = updateEventVote(event)
     dispatch(action)
@@ -115,8 +113,8 @@ export const decideEvent = groupId => async dispatch => {
 
 //Initial State
 const initialState = {
-  events: [],
-  singleEvent: {}
+  events: []
+  //singleEvent: {}
 }
 
 let idx
