@@ -205,7 +205,7 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
     next(err)
   }
 })
-
+// /groups/:groupId This is a variation of a PUT
 router.put('/:groupId/decideEvent', async (req, res, next) => {
   const groupId = Number(req.params.groupId)
   try {

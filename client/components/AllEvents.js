@@ -10,10 +10,10 @@ class AllEvents extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
   async componentDidMount() {
-    let userId = this.props.userId
+    let {userId} = this.props
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)
-    console.log(this.props)
+    console.log(this.props) //CG: Don't let these console logs merged in
   }
 
   handleClick() {
@@ -26,7 +26,7 @@ class AllEvents extends Component {
   }
 
   render() {
-    const {events} = this.props
+    const {events, userId} = this.props
     return (
       <div id="all-events">
         <h3>Let the Hunger Games begin!</h3>
@@ -39,13 +39,19 @@ class AllEvents extends Component {
                   key={activity.id}
                   userId={this.props.userId}
                 />
-                <Button
-                  onClick={() =>
-                    this.props.deleteEvent(this.props.userId, activity.id)
-                  }
-                >
-                  Delete
-                </Button>
+                {/* {
+                  activity.creatorId === userId ?
+                  (
+                    <Button
+                    onClick={() =>
+                      this.props.deleteEvent(this.props.userId, activity.id)
+                    }
+                  >
+                    Delete
+                  </Button>) :
+                  null
+                } */}
+              
               </>
             )
           })}

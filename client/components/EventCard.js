@@ -7,6 +7,7 @@ const EventCard = props => {
   const activity = props.activity
 
   return (
+    // CSS/HTML Class names and ids must all be kebab-case...event-card
     <div id="eventCard" key={activity.id}>
       <p id="name">{activity.name}</p>
       <p id="description">{activity.description}</p>

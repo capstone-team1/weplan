@@ -20,6 +20,7 @@ const gotEvents = events => ({
   events
 })
 
+//CG: Parsing this reducer has become very hard to understand.
 const gotEvent = event => ({
   type: GET_SINGLE_EVENT,
   event
@@ -95,7 +96,7 @@ export const changeEventVote = (userId, eventId, vote) => async dispatch => {
   try {
     const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
       vote
-    })
+    }) //CG: This should actually be a patch request
 
     const action = updateEventVote(event)
     dispatch(action)
@@ -151,6 +152,7 @@ export default function(state = initialState, action) {
           return el.id === action.event.id
         })
       )
+      // CG Don't need rest and slice.
       return {
         ...state,
         events: [
