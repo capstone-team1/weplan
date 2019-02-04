@@ -43,16 +43,15 @@ class CreateGroup extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <input placeholder="Description" name="description" />
+              <input
+                placeholder="Description"
+                name="description"
+                value={this.state.description}
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field>
-            <Button
-              color="blue"
-              type="submit"
-              onClick={this.handleSubmit}
-              value={this.state.description}
-            >
+            <Button color="blue" type="submit" onClick={this.handleSubmit}>
               Submit
             </Button>
           </Form.Field>

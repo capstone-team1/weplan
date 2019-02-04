@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createEvent} from '../store/index'
 import {connect} from 'react-redux'
-import {Button} from 'react-bootstrap'
+import {Button, Form, Segment} from 'semantic-ui-react'
 
 class CreateEvent extends Component {
   constructor() {
@@ -34,30 +34,64 @@ class CreateEvent extends Component {
   }
   render() {
     return (
-      <form onChange={this.handleChange}>
-        <input
-          id="eventName"
-          type="text"
-          name="name"
-          value={this.state.name}
-          placeholder="Enter Event Name"
-        />
-        <input
-          id="eventDescription"
-          type="text"
-          name="description"
-          value={this.state.description}
-          placeholder="Enter description"
-        />
-        <input
-          id="eventLocation"
-          type="text"
-          name="location"
-          value={this.state.location}
-          placeholder="Enter location"
-        />
-        <Button onClick={this.handleSubmit}>Submit</Button>
-      </form>
+      <Segment>
+        <Form onChange={this.handleChange}>
+          <Form.Group widths="equal">
+            <label>Create New Event</label>
+            <Form.Field>
+              <input
+                placeholder="Event Name"
+                name="name"
+                value={this.state.name}
+              />
+            </Form.Field>
+            <Form.Field>
+              <input
+                placeholder="Description"
+                name="description"
+                value={this.state.description}
+              />
+            </Form.Field>
+            <Form.Field>
+              <input
+                placeholder="Location"
+                name="location"
+                value={this.state.location}
+              />
+            </Form.Field>
+          </Form.Group>
+          <Form.Field>
+            <Button color="blue" type="submit" onClick={this.handleSubmit}>
+              Submit
+            </Button>
+          </Form.Field>
+        </Form>
+      </Segment>
+
+      // <form onChange={this.handleChange}>
+      //   <input
+      //     id="eventName"
+      //     type="text"
+      //     name="name"
+      //     value={this.state.name}
+      //     placeholder="Enter Event Name"
+      //   />
+      //   <input
+      //     id="eventDescription"
+      //     type="text"
+      //     name="description"
+      //     value={this.state.description}
+      //     placeholder="Enter description"
+      //   />
+      //   <input
+      //     id="eventLocation"
+      //     type="text"
+      //     name="location"
+      //     value={this.state.location}
+      //     placeholder="Enter location"
+      //   />
+      //   <Button onClick={this.handleSubmit}>Submit</Button>
+      // </form>
     )
   }
 }
