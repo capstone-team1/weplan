@@ -10,19 +10,19 @@ const EventCard = props => {
     <div id="event-card" key={activity.id}>
       <List divided selection>
         <List.Item>
-          <Label color="purple" horizontal>
+          <Label color="grey" horizontal>
             Name
           </Label>
           {activity.name}
         </List.Item>
         <List.Item>
-          <Label color="purple" horizontal>
+          <Label color="grey" horizontal>
             Description
           </Label>
           {activity.description}
         </List.Item>
         <List.Item>
-          <Label color="purple" horizontal>
+          <Label color="grey" horizontal>
             Location
           </Label>
           {activity.location}

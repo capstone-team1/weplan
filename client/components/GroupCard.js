@@ -1,30 +1,31 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Grid, Row, Col, ListGroup, Button} from 'react-bootstrap'
+import {Grid, Row, Col, ListGroup, Button, List, Label} from 'semantic-ui-react'
 import {removeSingleGroup} from '../store/index'
 
 const GroupCard = props => {
   return (
-    <Grid fluid>
-      <Row>
-        <ListGroup as="ul">
-          <Col md={2} xs={2}>
-            <h3>Name:</h3>
-            <h2>{props.name}</h2>
-          </Col>
-
-          <Col md={2} xs={2}>
-            <h3>Description:</h3>
-            <h2>{props.description}</h2>
-          </Col>
-          <Button
-            onClick={() => props.removeSingleGroup(props.groupId, props.userId)}
-          >
-            Delete Group
-          </Button>
-        </ListGroup>
-      </Row>
-    </Grid>
+    <List divided selection>
+      <List.Item>
+        <Label color="grey" horizontal>
+          Name
+        </Label>
+        {props.name}
+      </List.Item>
+      <List.Item>
+        <Label color="grey" horizontal>
+          Description
+        </Label>
+        {props.description}
+      </List.Item>
+      <List.Item>
+        <Button
+          onClick={() => props.removeSingleGroup(props.groupId, props.userId)}
+        >
+          Delete Group
+        </Button>
+      </List.Item>
+    </List>
   )
 }
 const mapStateToProps = state => {

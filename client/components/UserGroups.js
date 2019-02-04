@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchAllGroups} from '../store/index'
 import {CreateGroup, GroupCard} from './index'
+import {Segment} from 'semantic-ui-react'
 
 class UserGroups extends Component {
   async componentDidMount() {
@@ -17,7 +18,13 @@ class UserGroups extends Component {
           {groups.map(({id, name, description}) => {
             return (
               <Link to={`/group/${id}`} key={name}>
-                <GroupCard name={name} description={description} groupId={id} />
+                <Segment>
+                  <GroupCard
+                    name={name}
+                    description={description}
+                    groupId={id}
+                  />
+                </Segment>
               </Link>
             )
           })}

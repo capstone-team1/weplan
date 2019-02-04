@@ -2,8 +2,9 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchGlobalGroups, joinIntoGroup} from '../store/index'
-import {Button} from 'react-bootstrap'
+// import {Button} from 'react-bootstrap'
 import {GroupCard} from './index'
+import {Segment, Button} from 'semantic-ui-react'
 
 class JoinGroups extends Component {
   async componentDidMount() {
@@ -18,12 +19,18 @@ class JoinGroups extends Component {
           {groups.map(({id, name, description}) => {
             return (
               <Link to={`/group/${id}`} key={name}>
-                <GroupCard name={name} description={description} groupId={id} />
-                <Button
-                  onClick={() => this.props.joinIntoGroup(this.props.id, id)}
-                >
-                  Join new group
-                </Button>
+                <Segment>
+                  <GroupCard
+                    name={name}
+                    description={description}
+                    groupId={id}
+                  />
+                  <Button
+                    onClick={() => this.props.joinIntoGroup(this.props.id, id)}
+                  >
+                    Join group
+                  </Button>
+                </Segment>
               </Link>
             )
           })}
