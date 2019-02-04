@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, Label, Icon, List} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {changeEventVote} from '../store'
 
@@ -7,20 +7,41 @@ const EventCard = props => {
   const activity = props.activity
 
   return (
-    <div id="eventCard" key={activity.id}>
-      <p id="name">{activity.name}</p>
-      <p id="description">{activity.description}</p>
-      <p id="location">{activity.location}</p>
-      <p id="upvotes">Votes: {activity.votes}</p>
-      <Button onClick={() => props.changeVote(props.userId, activity.id, 1)}>
-        Upvote
-      </Button>
-      <Button
-        bsStyle="warning"
-        onClick={() => props.changeVote(props.userId, activity.id, -1)}
-      >
-        Downvote
-      </Button>
+    <div id="event-card" key={activity.id}>
+      <List divided selection>
+        <List.Item>
+          <Label color="grey" horizontal>
+            Name
+          </Label>
+          {activity.name}
+        </List.Item>
+        <List.Item>
+          <Label color="grey" horizontal>
+            Description
+          </Label>
+          {activity.description}
+        </List.Item>
+        <List.Item>
+          <Label color="grey" horizontal>
+            Location
+          </Label>
+          {activity.location}
+        </List.Item>
+        <List.Item>
+          <Button as="div" labelPosition="right">
+            <Button
+              color="red"
+              onClick={() => props.changeVote(props.userId, activity.id, 1)}
+            >
+              <Icon name="heart" />
+              Vote
+            </Button>
+            <Label as="a" basic color="red" pointing="left">
+              {activity.votes}
+            </Label>
+          </Button>
+        </List.Item>
+      </List>
     </div>
   )
 }

@@ -1,24 +1,22 @@
 import React from 'react'
-import {Grid, Row, Col, ListGroup} from 'react-bootstrap'
+import {List, Label} from 'semantic-ui-react'
 
 const GroupCard = props => {
-  let {name, description} = props
   return (
-    <Grid fluid>
-      <Row>
-        <ListGroup as="ul">
-          <Col md={2} xs={2}>
-            <h3>Name:</h3>
-            <h2>{name}</h2>
-          </Col>
-
-          <Col md={2} xs={2}>
-            <h3>Description:</h3>
-            <h2>{description}</h2>
-          </Col>
-        </ListGroup>
-      </Row>
-    </Grid>
+    <List divided selection>
+      <List.Item>
+        <Label color="grey" horizontal>
+          Name
+        </Label>
+        {props.name}
+      </List.Item>
+      <List.Item>
+        <Label color="grey" horizontal>
+          Description
+        </Label>
+        {props.description}
+      </List.Item>
+    </List>
   )
 }
 

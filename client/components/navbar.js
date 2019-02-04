@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Nav, Button} from 'react-bootstrap'
+import {Menu, Button, Icon} from 'semantic-ui-react'
 import {Link, NavLink} from 'react-router-dom'
 import {logout} from '../store'
 
@@ -13,23 +13,37 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
 
-          <NavLink to="/home">
-            <Button>Home </Button>
-          </NavLink>
+          <Menu widths={4}>
+            <Menu.Item>
+              <NavLink to="/home">
+                <Button>
+                  <Icon name="home" />
+                </Button>
+              </NavLink>
+            </Menu.Item>
 
-          <Link to="/join">
-            <Button>Join New Group</Button>
-          </Link>
+            <Menu.Item>
+              <Link to="/join">
+                <Button>
+                  <Icon name="plus square" />Join Group
+                </Button>
+              </Link>
+            </Menu.Item>
 
-          <Link to="/groups">
-            <Button>My Groups</Button>
-          </Link>
+            <Menu.Item>
+              <Link to="/groups">
+                <Button>
+                  <Icon name="group" />My Groups
+                </Button>
+              </Link>
+            </Menu.Item>
 
-          <Button>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </Button>
+            <Menu.Item>
+              <Button onClick={handleClick}>
+                <Icon name="log out" />Logout
+              </Button>
+            </Menu.Item>
+          </Menu>
         </div>
       ) : (
         <div>

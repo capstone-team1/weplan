@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchAllGroups, removeSingleGroup} from '../store/index'
 import {CreateGroup, GroupCard} from './index'
-import {Button} from 'react-bootstrap'
+import {Button} from 'semantic-ui-react'
 
 class UserGroups extends Component {
   async componentDidMount() {
