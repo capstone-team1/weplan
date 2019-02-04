@@ -1,8 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Button, List, Label} from 'semantic-ui-react'
-import {removeSingleGroup} from '../store/index'
-import {Link} from 'react-router-dom'
+import {List, Label} from 'semantic-ui-react'
 
 const GroupCard = props => {
   return (
@@ -23,8 +20,4 @@ const GroupCard = props => {
   )
 }
 
-const mapDispatchToProps = dispatch => ({
-  removeSingleGroup: (groupId, userId) =>
-    dispatch(removeSingleGroup(groupId, userId))
-})
-export default connect(null, mapDispatchToProps)(GroupCard)
+export default GroupCard
