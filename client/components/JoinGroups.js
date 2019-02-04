@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchGlobalGroups, joinIntoGroup} from '../store/index'
-// import {Button} from 'react-bootstrap'
 import {GroupCard} from './index'
 import {Segment, Button} from 'semantic-ui-react'
 
