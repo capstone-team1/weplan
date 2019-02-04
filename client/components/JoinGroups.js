@@ -9,6 +9,7 @@ class JoinGroups extends Component {
   async componentDidMount() {
     await this.props.fetchGlobalGroups()
   }
+
   render() {
     let groups = this.props.groups
     console.log(this.props)
@@ -17,14 +18,20 @@ class JoinGroups extends Component {
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <Link to={`/group/${id}`} key={name}>
-                <GroupCard name={name} description={description} groupId={id} />
+              <div key={name}>
+                <Link to={`/group/${id}`} key={name}>
+                  <GroupCard
+                    name={name}
+                    description={description}
+                    groupId={id}
+                  />
+                </Link>
                 <Button
                   onClick={() => this.props.joinIntoGroup(this.props.id, id)}
                 >
                   Join new group
                 </Button>
-              </Link>
+              </div>
             )
           })}
         </div>
