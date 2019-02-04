@@ -15,7 +15,6 @@ class SingleGroup extends Component {
         <br />
 
         <div>
-          <h3>Create an Event!</h3>
           <CreateEvent
             userId={this.props.userId}
             groupId={this.props.match.params.groupId}
