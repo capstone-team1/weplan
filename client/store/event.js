@@ -5,7 +5,7 @@ import axios from 'axios'
  * ACTION TYPES
  */
 const GET_EVENTS = 'GET_EVENTS'
-// const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
+const GET_SINGLE_EVENT = 'GET_SINGLE_EVENT'
 const SET_EVENT = 'SET_EVENT'
 const DELETE_EVENT = 'DELETE_EVENT'
 const UPDATE_EVENT_VOTE = 'UPDATE_EVENT_VOTE'
@@ -20,10 +20,10 @@ const gotEvents = events => ({
   events
 })
 
-// const gotEvent = event => ({
-//   type: GET_SINGLE_EVENT,
-//   event
-// })
+const gotEvent = event => ({
+  type: GET_SINGLE_EVENT,
+  event
+})
 
 const setEvent = event => {
   return {
@@ -40,9 +40,10 @@ const deleteEvent = eventId => {
 }
 
 const updateEventVote = event => {
+  console.log(event, 'asdsa')
   return {
     type: UPDATE_EVENT_VOTE,
-    event: event.data
+    event: event
   }
 }
 
@@ -64,10 +65,10 @@ export const fetchAllEvents = (userId, groupId) => async dispatch => {
   dispatch(gotEvents(data))
 }
 
-// export const fetchSingleEvent = (userId, eventId) => async dispatch => {
-//   const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
-//   dispatch(gotEvent(event))
-// }
+export const fetchSingleEvent = (userId, eventId) => async dispatch => {
+  const {event} = await axios.get(`/api/users/${userId}/events/${eventId}/`)
+  dispatch(gotEvent(event))
+}
 
 export const createEvent = (userId, groupId, event) => async dispatch => {
   try {
@@ -93,8 +94,7 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
 
 export const changeEventVote = eventId => async dispatch => {
   try {
-    const event = await axios.put(`/events/${eventId}/vote`)
-
+    const {event} = await axios.put(`/events/${eventId}/votes`)
     const action = updateEventVote(event)
     dispatch(action)
   } catch (err) {
@@ -113,8 +113,8 @@ export const decideEvent = groupId => async dispatch => {
 
 //Initial State
 const initialState = {
-  events: []
-  //singleEvent: {}
+  events: [],
+  singleEvent: {}
 }
 
 let idx
@@ -125,8 +125,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GET_EVENTS:
       return {...state, events: action.events}
-    // case GET_SINGLE_EVENT:
-    //   return {...state, singleEvent: action.event}
+    case GET_SINGLE_EVENT:
+      return {...state, singleEvent: action.event}
     case SET_EVENT:
       return {
         ...state,
@@ -139,9 +139,9 @@ export default function(state = initialState, action) {
           ...state.events.filter(event => {
             return event.id !== action.eventId
           })
-        ]
-        // singleEvent:
-        //   state.singleEvent.id !== action.eventId ? state.singleEvent : {}
+        ],
+        singleEvent:
+          state.singleEvent.id !== action.eventId ? state.singleEvent : {}
       }
     case UPDATE_EVENT_VOTE:
       idx = state.events.indexOf(
@@ -155,9 +155,9 @@ export default function(state = initialState, action) {
           ...state.events.slice(0, idx),
           action.event,
           ...state.events.slice(idx + 1)
-        ],
-        singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : event
+        ]
+        // singleEvent:
+        //   state.singleEvent.id !== action.event.id ? state.singleEvent : event
       }
     case DECIDE_EVENTS:
       return {
