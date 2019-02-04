@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Group, Events} = require('../db/models')
+const {User, Group, Events, UserEvent} = require('../db/models')
 const Op = require('sequelize').Op
 
 module.exports = router
@@ -123,24 +123,37 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
   }
 })
 
-//updating an event by userid
+//UPVOTE AND DOWNVOTE ROUTE
 router.put('/:userId/events/:eventId', async (req, res, next) => {
   try {
-    const event = await Events.findById(+req.params.eventId)
-    const newVotes = event.votes + +req.body.vote
-    const updateArr = await Events.update(
-      {
-        votes: newVotes //req.body.vote will either be 1 or -1
-      },
-      {
-        returning: true,
-        where: {id: req.params.eventId}
-      }
-    )
-    res.json(updateArr[1][0]) // Model.update "returns a promise for an array.
-    // The first element of the array is the number of rows that were affected.
-    // The second element of the array is the affected rows themselves."
-    // - https://github.com/tmkelly28/sequelize-reference
+    //  find through table instance
+    const currentVote = await UserEvent.findAll({
+      where: {userId: req.params.userId, eventId: Number(req.params.eventId)}
+    })
+
+    if (currentVote[0].vote === 'NEUTRAL') {
+      await currentVote[0].update({vote: 'UP'})
+
+      const currentEventCount = await Events.findById(
+        Number(req.params.eventId)
+      )
+
+      const updateEventcount = await currentEventCount.increment('votes', {
+        by: 1
+      })
+      res.json(updateEventcount)
+    } else if (currentVote[0].vote === 'UP') {
+      const updatedVote = await currentVote[0].update({vote: 'NEUTRAL'})
+      const currentEventCount = await Events.findById(
+        Number(req.params.eventId)
+      )
+
+      const updateCurrentEvent = await currentEventCount.decrement('votes', {
+        by: 1
+      })
+
+      res.json(updateCurrentEvent)
+    }
   } catch (err) {
     next(err)
   }
