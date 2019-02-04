@@ -124,11 +124,11 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
 })
 
 //UPVOTE AND DOWNVOTE ROUTE
-router.put('/:userId/events/:eventId', async (req, res, next) => {
+router.put('/events/:eventId/vote', async (req, res, next) => {
   try {
     //  find through table instance
     const currentVote = await UserEvent.findAll({
-      where: {userId: req.params.userId, eventId: Number(req.params.eventId)}
+      where: {userId: req.user.id, eventId: Number(req.params.eventId)}
     })
 
     if (currentVote[0].vote === 'NEUTRAL') {
