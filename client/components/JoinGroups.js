@@ -16,16 +16,14 @@ class JoinGroups extends Component {
       <div>
         {groups.map(({id, name, description}) => {
           return (
-            <Link to={`/group/${id}`} key={name}>
-              <Segment>
-                <GroupCard name={name} description={description} groupId={id} />
-                <Button
-                  onClick={() => this.props.joinIntoGroup(this.props.id, id)}
-                >
-                  Join group
-                </Button>
-              </Segment>
-            </Link>
+            <Segment key={name}>
+              <GroupCard name={name} description={description} groupId={id} />
+              <Button
+                onClick={() => this.props.joinIntoGroup(this.props.id, id)}
+              >
+                Join group
+              </Button>
+            </Segment>
           )
         })}
       </div>

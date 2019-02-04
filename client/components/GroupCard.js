@@ -7,26 +7,17 @@ import {Link} from 'react-router-dom'
 const GroupCard = props => {
   return (
     <List divided selection>
-      <Link to={`/group/${props.groupId}`}>
-        <List.Item>
-          <Label color="grey" horizontal>
-            Name
-          </Label>
-          {props.name}
-        </List.Item>
-        <List.Item>
-          <Label color="grey" horizontal>
-            Description
-          </Label>
-          {props.description}
-        </List.Item>
-      </Link>
       <List.Item>
-        <Button
-          onClick={() => props.removeSingleGroup(props.groupId, props.userId)}
-        >
-          Delete Group
-        </Button>
+        <Label color="grey" horizontal>
+          Name
+        </Label>
+        {props.name}
+      </List.Item>
+      <List.Item>
+        <Label color="grey" horizontal>
+          Description
+        </Label>
+        {props.description}
       </List.Item>
     </List>
   )

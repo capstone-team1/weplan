@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchAllGroups, removeSingleGroup} from '../store/index'
 import {CreateGroup, GroupCard} from './index'
-import {Segment, Button} from 'semantic-ui-react'
+import {Button} from 'react-bootstrap'
 
 class UserGroups extends Component {
   async componentDidMount() {
@@ -17,9 +17,18 @@ class UserGroups extends Component {
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <Segment key={name}>
-                <GroupCard name={name} description={description} groupId={id} />
-              </Segment>
+              <div key={name}>
+                <Link to={`/group/${id}`}>
+                  <GroupCard name={name} description={description} />
+                </Link>
+                <Button
+                  onClick={() =>
+                    this.props.removeSingleGroup(id, this.props.id)
+                  }
+                >
+                  Delete Group
+                </Button>
+              </div>
             )
           })}
         </div>
