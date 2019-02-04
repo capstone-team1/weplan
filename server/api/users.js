@@ -231,14 +231,13 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
 
 router.get('/groups/join', async (req, res, next) => {
   try {
-    let id = req.user.id
     const joinGroups = await Group.findAll({
       include: [
         {
           model: User,
           where: {
             id: {
-              $ne: id
+              $ne: req.user.id
             }
           }
         }
