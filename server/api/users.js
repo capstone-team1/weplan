@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Group, Events, UserEvent} = require('../db/models')
+const {User, Group, Events, UserEvent, UserGroup} = require('../db/models')
 const Op = require('sequelize').Op
 
 module.exports = router
@@ -107,6 +107,12 @@ router.post('/:userId/groups/:groupId/events', async (req, res, next) => {
       location: req.body.location,
       groupId: id
     })
+    const allGroupUsers = await Group.findAll({
+      where: {id: id},
+      include: {model: User}
+    })
+    console.log('ALLL USERS ASSOCIATED WITH THE CURRENT GROUP', allGroupUsers)
+    event.addUser(allGroupUsers[0].users)
     res.json(event)
   } catch (err) {
     next(err)
@@ -125,6 +131,7 @@ router.get('/:userId/events/:eventId', async (req, res, next) => {
 
 //UPVOTE AND DOWNVOTE ROUTE
 router.put('/events/:eventId/vote', async (req, res, next) => {
+  console.log('user id: ', req.user.id)
   try {
     //  find through table instance
     const currentVote = await UserEvent.findAll({
@@ -133,6 +140,7 @@ router.put('/events/:eventId/vote', async (req, res, next) => {
 
     if (currentVote[0].vote === 'NEUTRAL') {
       await currentVote[0].update({vote: 'UP'})
+      console.log(currentVote, 'currentvoteeeee')
 
       const currentEventCount = await Events.findById(
         Number(req.params.eventId)
@@ -212,6 +220,10 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
     const currentUser = await User.findById(userId)
 
     await currentGroup.addUser(currentUser)
+
+    const allEventsForGroup = await Events.findAll({where: {groupId: groupId}})
+    //  allEventsForGroup.addUser(currentUser)
+    currentUser.addEvents(allEventsForGroup)
 
     res.send('User has joined the group successfully!')
   } catch (err) {

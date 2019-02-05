@@ -31,9 +31,9 @@ class AllEvents extends Component {
       <div id="all-events">
         <h3>Let the Hunger Games begin!</h3>
         <div>
-          {events.map(activity => {
+          {events.map((activity, i) => {
             return (
-              <>
+              <div key={i}>
                 <EventCard
                   activity={activity}
                   key={activity.id}
@@ -46,7 +46,7 @@ class AllEvents extends Component {
                 >
                   Delete
                 </Button>
-              </>
+              </div>
             )
           })}
         </div>
