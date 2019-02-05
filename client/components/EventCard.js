@@ -43,15 +43,8 @@ const EventCard = props => {
   )
 }
 
-const mapStateToProps = state => {
-  //remove if works without userid etcetc
-  return {
-    userId: state.user.id
-  }
-}
-
 const mapDispatchToProps = dispatch => ({
   changeVote: eventId => dispatch(changeEventVote(eventId))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventCard)
+export default connect(null, mapDispatchToProps)(EventCard)

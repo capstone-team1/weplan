@@ -9,7 +9,7 @@ async function seed() {
 
   //seed users
   const user1 = await User.create({
-    handle: 'frank',
+    handle: 'Frank',
     email: 'frank@email.com',
     password: '123'
   })
@@ -43,7 +43,7 @@ async function seed() {
 
   const event3 = await Events.create({
     name: 'Toms Restaurant',
-    description: 'fun time',
+    description: 'Fun time, good food!',
     location: '11 Hanover',
     votes: 0
   })
@@ -56,12 +56,12 @@ async function seed() {
 
   const group2 = await Group.create({
     name: 'FSGroup1',
-    description: 'NoMoreShots!'
+    description: 'NoMoreShots! =['
   })
 
   const group3 = await Group.create({
     name: 'Football Buds',
-    description: 'Football'
+    description: 'Fantasy (Haha) Football'
   })
 
   await user1.setGroups(group1)
@@ -82,9 +82,6 @@ async function seed() {
   await group3.setEvents(event3)
   await event3.setUsers(user3)
 
-  // console.log(`seeded ${users.length} users`)
-  // console.log(`seeded ${groups.length} groups`)
-  // console.log(`seeded ${events.length} events`)
   console.log(`seeded successfully`)
 }
 

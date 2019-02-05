@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {fetchGlobalGroups, joinIntoGroup} from '../store/index'
 import {GroupCard} from './index'
 import {Segment, Button} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
 
 class JoinGroups extends Component {
   async componentDidMount() {

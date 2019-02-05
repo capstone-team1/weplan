@@ -11,7 +11,6 @@ const db = require('../db')
  *    BlogPost.belongsTo(User)
  */
 
-// User.hasMany(Group) //CG: I'm not convinced you need this. let user = await User.findById(1); user.getGroups()
 User.belongsToMany(Group, {through: 'user_group'}) //users_groups
 Group.belongsToMany(User, {through: 'user_group'}) //memberships
 

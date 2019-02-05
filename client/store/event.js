@@ -40,7 +40,6 @@ const deleteEvent = eventId => {
 }
 
 const updateEventVote = event => {
-  console.log(event, 'asdsa')
   return {
     type: UPDATE_EVENT_VOTE,
     event: event.data
@@ -156,8 +155,6 @@ export default function(state = initialState, action) {
           action.event,
           ...state.events.slice(idx + 1)
         ]
-        // singleEvent:
-        //   state.singleEvent.id !== action.event.id ? state.singleEvent : event
       }
     case DECIDE_EVENTS:
       return {
