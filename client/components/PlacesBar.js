@@ -14,8 +14,9 @@ export default class PlacesBar extends Component {
   }
 
   handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
-    console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
+    // console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
     this.setState({search: '', value: geocodedPrediction.formatted_address})
+    this.props.handleSelectChange(geocodedPrediction.formatted_address)
   }
 
   render() {

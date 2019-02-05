@@ -14,6 +14,7 @@ class CreateEvent extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLocationChange = this.handleLocationChange.bind(this)
   }
 
   handleChange(event) {
@@ -33,6 +34,11 @@ class CreateEvent extends Component {
       location: ''
     })
   }
+
+  handleLocationChange(str) {
+    this.setState({location: str})
+  }
+
   render() {
     return (
       <Segment>
@@ -54,7 +60,10 @@ class CreateEvent extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <PlacesBar />
+              <PlacesBar
+                location={this.state.location}
+                handleSelectChange={this.handleLocationChange}
+              />
             </Form.Field>
           </Form.Group>
           <Form.Field>
