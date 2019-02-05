@@ -263,7 +263,7 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
       transporter.sendMail(
         {
           from: 'WePlan@gmail.com',
-          to: 'shayrockssox@aim.com',
+          to: user.email,
           subject: 'An event has been selected!',
           html: '<p>Hello there! Your groups event has been planned!</p>'
         },
