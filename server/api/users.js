@@ -1,6 +1,16 @@
 const router = require('express').Router()
 const {User, Group, Events, UserEvent} = require('../db/models')
 const Op = require('sequelize').Op
+const nodemailer = require('nodemailer')
+
+//NodeMailer using Gmail
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'WePlanFSA@gmail.com',
+    pass: 'weplan123'
+  }
+})
 
 module.exports = router
 
@@ -225,6 +235,7 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
   }
 })
 
+//Decides the event (time out currently used in front end)
 router.put('/:groupId/decideEvent', async (req, res, next) => {
   const groupId = Number(req.params.groupId)
   try {
@@ -243,6 +254,26 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
         id: {[Op.ne]: bestEvent[0].id}
       }
     })
+
+    const members = await Group.findAll({
+      where: {id: groupId},
+      include: {model: User, attributes: ['email']}
+    })
+    members[0].users.forEach(user =>
+      transporter.sendMail(
+        {
+          from: 'WePlan@gmail.com',
+          to: 'shayrockssox@aim.com',
+          subject: 'An event has been selected!',
+          html: '<p>Hello there! Your groups event has been planned!</p>'
+        },
+        function(err, info) {
+          if (err) console.log(err)
+          else console.log(info)
+        }
+      )
+    )
+
     res.json(bestEvent)
   } catch (err) {
     next(err)

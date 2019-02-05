@@ -19,7 +19,7 @@ class AllEvents extends Component {
     setTimeout(() => {
       let groupId = this.props.groupId
       this.props.decideEvent(groupId)
-    }, 10000)
+    }, 1000)
     //1 second = 1,000 milliseconds.
   }
 
