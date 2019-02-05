@@ -70,7 +70,6 @@ export const fetchGlobalGroups = () => async dispatch => {
 
 export const fetchSingleGroup = (userId, groupId) => async dispatch => {
   try {
-    console.log('BEEP BEEP', userId, groupId)
     const {data} = await axios.get(`/api/users/${userId}/groups/${groupId}`)
     dispatch(gotSingleGroup(data))
   } catch (err) {

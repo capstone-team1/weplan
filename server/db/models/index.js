@@ -2,6 +2,7 @@ const User = require('./user')
 const Group = require('./groups')
 const Events = require('./events')
 const UserEvent = require('./userEvents')
+const db = require('../db')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -10,7 +11,6 @@ const UserEvent = require('./userEvents')
  *    BlogPost.belongsTo(User)
  */
 
-// User.hasMany(Group) //CG: I'm not convinced you need this. let user = await User.findById(1); user.getGroups()
 User.belongsToMany(Group, {through: 'user_group'}) //users_groups
 Group.belongsToMany(User, {through: 'user_group'}) //memberships
 
@@ -19,6 +19,8 @@ Events.belongsToMany(User, {through: UserEvent})
 
 Events.belongsTo(Group)
 Group.hasMany(Events)
+
+const UserGroup = db.model('user_group')
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -30,5 +32,6 @@ module.exports = {
   User,
   Group,
   Events,
-  UserEvent
+  UserEvent,
+  UserGroup
 }

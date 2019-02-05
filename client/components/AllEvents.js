@@ -13,27 +13,25 @@ class AllEvents extends Component {
     let userId = this.props.userId
     let groupId = this.props.groupId
     await this.props.fetchAllEvents(userId, groupId)
-    console.log(this.props)
   }
 
   handleClick() {
     setTimeout(() => {
       let groupId = this.props.groupId
       this.props.decideEvent(groupId)
-    }, 10000) //ten seconds = 10,000 milliseconds.
-    //we will make this choosable later but
-    //for development we will keep it short
+    }, 10000)
+    //1 second = 1,000 milliseconds.
   }
 
   render() {
     const {events} = this.props
     return (
       <div id="all-events">
-        <h3>Let the Hunger Games begin!</h3>
+        <h3>Vote on your favorite Event!</h3>
         <div>
-          {events.map(activity => {
+          {events.map((activity, i) => {
             return (
-              <>
+              <div key={i}>
                 <EventCard
                   activity={activity}
                   key={activity.id}
@@ -46,7 +44,7 @@ class AllEvents extends Component {
                 >
                   Delete
                 </Button>
-              </>
+              </div>
             )
           })}
         </div>

@@ -17,7 +17,6 @@ const Events = db.define('events', {
   location: {
     type: Sequelize.STRING
   },
-  //CG: I could agree that votes denormalized is a good idea for loading purposes but don't necessarily thing you should denormalize twice.
   votes: {
     type: Sequelize.INTEGER,
     defaultValue: 0

@@ -6,9 +6,6 @@ const User = db.define('user', {
   handle: {
     type: Sequelize.STRING,
     allowNull: true
-    // defaultValue: () => {
-    //   return this.getDataValue('email').indexOf
-    // }
   },
   email: {
     type: Sequelize.STRING,
