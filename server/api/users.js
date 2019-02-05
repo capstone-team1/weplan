@@ -141,6 +141,7 @@ router.put('/events/:eventId/vote', async (req, res, next) => {
       const updateEventcount = await currentEventCount.increment('votes', {
         by: 1
       })
+      console.log('updateeventcountTOP', updateEventcount)
       res.json(updateEventcount)
     } else if (currentVote[0].vote === 'UP') {
       const updatedVote = await currentVote[0].update({vote: 'NEUTRAL'})
@@ -151,7 +152,7 @@ router.put('/events/:eventId/vote', async (req, res, next) => {
       const updateCurrentEvent = await currentEventCount.decrement('votes', {
         by: 1
       })
-
+      console.log('updatecurrenteventBOT', updateCurrentEvent)
       res.json(updateCurrentEvent)
     }
   } catch (err) {

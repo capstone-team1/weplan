@@ -31,21 +31,21 @@ async function seed() {
     name: 'Dinner at OpenMarket',
     description: 'Meet up for fun cheap half off dinner',
     location: '343 Hanover',
-    votes: 2
+    votes: 0
   })
 
   const event2 = await Events.create({
     name: 'Kilarny',
     description: 'Shots!',
     location: '7 Hanover',
-    votes: 1
+    votes: 0
   })
 
   const event3 = await Events.create({
     name: 'Toms Restaurant',
     description: 'fun time',
     location: '11 Hanover',
-    votes: 1
+    votes: 0
   })
 
   //seed groups

@@ -43,7 +43,7 @@ const updateEventVote = event => {
   console.log(event, 'asdsa')
   return {
     type: UPDATE_EVENT_VOTE,
-    event: event
+    event: event.data
   }
 }
 
@@ -94,7 +94,7 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
 
 export const changeEventVote = eventId => async dispatch => {
   try {
-    const {event} = await axios.put(`/events/${eventId}/votes`)
+    const event = await axios.put(`/api/users/events/${eventId}/vote`)
     const action = updateEventVote(event)
     dispatch(action)
   } catch (err) {
