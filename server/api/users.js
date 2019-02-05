@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Group, Events, UserEvent, UserGroup} = require('../db/models')
+const {User, Group, Events, UserEvent} = require('../db/models')
 const Op = require('sequelize').Op
 
 module.exports = router
