@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import ReactGoogleMapLoader from 'react-google-maps-loader'
 import ReactGooglePlacesSuggest from 'react-google-places-suggest'
+import MY_API_KEY from '../../secrets'
 
-const MY_API_KEY = process.env.GOOGLE_BROWSER_KEY
+// const MY_API_KEY = process.env.GOOGLE_BROWSER_KEY
 
 export default class UserHome extends React.Component {
   state = {
@@ -24,7 +25,7 @@ export default class UserHome extends React.Component {
     return (
       <ReactGoogleMapLoader
         params={{
-          key: process.env.GOOGLE_BROWSER_KEY,
+          key: process.env.GOOGLE_PLACES_API,
           libraries: 'places,geocode'
         }}
         render={googleMaps =>
