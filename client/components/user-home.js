@@ -1,63 +1,37 @@
-import React, {Component} from 'react'
-import ReactGoogleMapLoader from 'react-google-maps-loader'
-import ReactGooglePlacesSuggest from 'react-google-places-suggest'
-import MY_API_KEY from '../../secrets'
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {Header} from 'semantic-ui-react'
 
-// const MY_API_KEY = process.env.GOOGLE_BROWSER_KEY
+/**
+ * COMPONENT
+ */
+export const UserHome = props => {
+  const {email} = props
 
-export default class UserHome extends React.Component {
-  state = {
-    search: '',
-    value: ''
+  return (
+    <div>
+      <Header as="h2" icon textAlign="center">
+        <Header.Content>Welcome, {email}</Header.Content>
+      </Header>
+    </div>
+  )
+}
+
+/**
+ * CONTAINER
+ */
+const mapState = state => {
+  return {
+    email: state.user.email
   }
+}
 
-  handleInputChange = e => {
-    this.setState({search: e.target.value, value: e.target.value})
-  }
+export default connect(mapState)(UserHome)
 
-  handleSelectSuggest = (geocodedPrediction, originalPrediction) => {
-    console.log(geocodedPrediction, originalPrediction) // eslint-disable-line
-    this.setState({search: '', value: geocodedPrediction.formatted_address})
-  }
-
-  render() {
-    const {search, value} = this.state
-    return (
-      <ReactGoogleMapLoader
-        params={{
-          key: process.env.GOOGLE_PLACES_API,
-          libraries: 'places,geocode'
-        }}
-        render={googleMaps =>
-          googleMaps && (
-            <ReactGooglePlacesSuggest
-              googleMaps={googleMaps}
-              autocompletionRequest={{
-                input: search
-                // Optional options
-                // https://developers.google.com/maps/documentation/javascript/reference?hl=fr#AutocompletionRequest
-              }}
-              // Optional props
-              onSelectSuggest={this.handleSelectSuggest}
-              textNoResults="My custom no results text" // null or "" if you want to disable the no results item
-              customRender={prediction => (
-                <div className="customWrapper">
-                  {prediction
-                    ? prediction.description
-                    : 'My custom no results text'}
-                </div>
-              )}
-            >
-              <input
-                type="text"
-                value={value}
-                placeholder="Search a location"
-                onChange={this.handleInputChange}
-              />
-            </ReactGooglePlacesSuggest>
-          )
-        }
-      />
-    )
-  }
+/**
+ * PROP TYPES
+ */
+UserHome.propTypes = {
+  email: PropTypes.string
 }
