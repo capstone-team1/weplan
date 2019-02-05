@@ -52,7 +52,6 @@ export default class PlacesBar extends Component {
                 placeholder="Search a location"
                 name="location"
                 onChange={this.handleInputChange}
-                onSelect={this.handleInputChange}
               />
             </ReactGooglePlacesSuggest>
           )
