@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {createEvent} from '../store/index'
 import {connect} from 'react-redux'
 import {Button, Form, Segment} from 'semantic-ui-react'
+import PlacesBar from './PlacesBar'
 
 class CreateEvent extends Component {
   constructor() {
@@ -13,6 +14,7 @@ class CreateEvent extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleLocationChange = this.handleLocationChange.bind(this)
   }
 
   handleChange(event) {
@@ -32,6 +34,11 @@ class CreateEvent extends Component {
       location: ''
     })
   }
+
+  handleLocationChange(str) {
+    this.setState({location: str})
+  }
+
   render() {
     return (
       <Segment>
@@ -53,10 +60,9 @@ class CreateEvent extends Component {
               />
             </Form.Field>
             <Form.Field>
-              <input
-                placeholder="Location"
-                name="location"
-                value={this.state.location}
+              <PlacesBar
+                location={this.state.location}
+                handleSelectChange={this.handleLocationChange}
               />
             </Form.Field>
           </Form.Group>
