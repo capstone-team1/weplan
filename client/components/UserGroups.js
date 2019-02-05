@@ -33,7 +33,6 @@ class UserGroups extends Component {
           })}
         </div>
         <div>
-          <h3>Create A Group!</h3>
           <CreateGroup />
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {createGroup} from '../store/index'
 import {connect} from 'react-redux'
-import {Button, Form, Label, Segment} from 'semantic-ui-react'
+import {Button, Form, Segment} from 'semantic-ui-react'
 
 class CreateGroup extends Component {
   constructor() {

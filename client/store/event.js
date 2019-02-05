@@ -91,12 +91,9 @@ export const deleteSingleEvent = (userId, eventId) => async dispatch => {
   }
 }
 
-export const changeEventVote = (userId, eventId, vote) => async dispatch => {
+export const changeEventVote = eventId => async dispatch => {
   try {
-    const event = await axios.put(`/api/users/${userId}/events/${eventId}/`, {
-      vote
-    })
-
+    const event = await axios.put(`/api/users/events/${eventId}/vote`)
     const action = updateEventVote(event)
     dispatch(action)
   } catch (err) {
@@ -157,9 +154,7 @@ export default function(state = initialState, action) {
           ...state.events.slice(0, idx),
           action.event,
           ...state.events.slice(idx + 1)
-        ],
-        singleEvent:
-          state.singleEvent.id !== action.event.id ? state.singleEvent : event
+        ]
       }
     case DECIDE_EVENTS:
       return {

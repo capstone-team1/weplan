@@ -67,31 +67,6 @@ class CreateEvent extends Component {
           </Form.Field>
         </Form>
       </Segment>
-
-      // <form onChange={this.handleChange}>
-      //   <input
-      //     id="eventName"
-      //     type="text"
-      //     name="name"
-      //     value={this.state.name}
-      //     placeholder="Enter Event Name"
-      //   />
-      //   <input
-      //     id="eventDescription"
-      //     type="text"
-      //     name="description"
-      //     value={this.state.description}
-      //     placeholder="Enter description"
-      //   />
-      //   <input
-      //     id="eventLocation"
-      //     type="text"
-      //     name="location"
-      //     value={this.state.location}
-      //     placeholder="Enter location"
-      //   />
-      //   <Button onClick={this.handleSubmit}>Submit</Button>
-      // </form>
     )
   }
 }

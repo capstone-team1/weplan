@@ -107,6 +107,11 @@ router.post('/:userId/groups/:groupId/events', async (req, res, next) => {
       location: req.body.location,
       groupId: id
     })
+    const allGroupUsers = await Group.findAll({
+      where: {id: id},
+      include: {model: User}
+    })
+    event.addUser(allGroupUsers[0].users)
     res.json(event)
   } catch (err) {
     next(err)
@@ -143,7 +148,7 @@ router.put('/events/:eventId/vote', async (req, res, next) => {
       })
       res.json(updateEventcount)
     } else if (currentVote[0].vote === 'UP') {
-      const updatedVote = await currentVote[0].update({vote: 'NEUTRAL'})
+      await currentVote[0].update({vote: 'NEUTRAL'})
       const currentEventCount = await Events.findById(
         Number(req.params.eventId)
       )
@@ -151,7 +156,6 @@ router.put('/events/:eventId/vote', async (req, res, next) => {
       const updateCurrentEvent = await currentEventCount.decrement('votes', {
         by: 1
       })
-
       res.json(updateCurrentEvent)
     }
   } catch (err) {
@@ -212,6 +216,9 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
 
     await currentGroup.addUser(currentUser)
 
+    const allEventsForGroup = await Events.findAll({where: {groupId: groupId}})
+    currentUser.addEvents(allEventsForGroup)
+
     res.send('User has joined the group successfully!')
   } catch (err) {
     next(err)
@@ -231,7 +238,7 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
         votes: topVotesNum
       }
     })
-    const deletedOldEvents = await Events.destroy({
+    await Events.destroy({
       where: {
         id: {[Op.ne]: bestEvent[0].id}
       }
