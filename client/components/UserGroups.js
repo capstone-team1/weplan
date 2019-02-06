@@ -10,6 +10,7 @@ class UserGroups extends Component {
     let userId = this.props.id
     await this.props.fetchAllGroups(userId)
   }
+
   render() {
     let {groups} = this.props
     return (
@@ -19,7 +20,16 @@ class UserGroups extends Component {
             return (
               <div key={name} style={{padding: '20px', textAlign: 'center'}}>
                 <Link to={`/group/${id}`}>
-                  <GroupCard name={name} description={description} />
+                  <GroupCard
+                    name={name}
+                    description={description}
+                    style={{
+                      padding: '20px',
+                      textAlign: 'center',
+                      border: '3px solid rgba(255, 255, 255, .5)',
+                      borderRadius: '7px'
+                    }}
+                  />
                 </Link>
                 <Button
                   onClick={() =>
@@ -38,7 +48,14 @@ class UserGroups extends Component {
           })}
         </div>
         <div>
-          <CreateGroup />
+          <CreateGroup
+            style={{
+              padding: '20px',
+              textAlign: 'center',
+              border: '3px solid rgba(255, 255, 255, .5)',
+              borderRadius: '7px'
+            }}
+          />
         </div>
       </div>
     )

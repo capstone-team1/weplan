@@ -14,8 +14,8 @@ const GroupCard = props => {
           textAlign: 'center',
           paddingRight: '15%',
           paddingLeft: '15%',
-          marginLeft: '25%',
-          marginRight: '25%'
+          marginLeft: 'auto',
+          marginRight: 'auto'
         }}
       >
         <List.Item>

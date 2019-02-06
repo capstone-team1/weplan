@@ -29,3 +29,10 @@ a {
   border-top-right-radius: '25px';
   border-top-left-radius: '25px';
 }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
