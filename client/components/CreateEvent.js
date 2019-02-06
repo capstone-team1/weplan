@@ -44,7 +44,7 @@ class CreateEvent extends Component {
       <div>
         <Segment
           style={{
-            backgroundColor: '#f6a794',
+            backgroundColor: '#A2E8DD',
             border: '3px solid rgba(255, 255, 255, .5)',
             borderTopRightRadius: '25px',
             borderTopLeftRadius: '25px'
@@ -55,7 +55,7 @@ class CreateEvent extends Component {
             style={{
               textAlign: 'center',
               margin: 'auto',
-              color: '#333333'
+              color: '#35524A'
             }}
           >
             <h2>Create New Event</h2>
@@ -66,24 +66,24 @@ class CreateEvent extends Component {
                 value={this.state.name}
               />
             </Form.Field>
-            <Form.Field style={{margin: '25px'}}>
+            <Form.Field style={{margin: '6px'}}>
               <input
                 placeholder="Description"
                 name="description"
                 value={this.state.description}
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field style={{textAlign: 'center', margin: '6px'}}>
               <PlacesBar
                 location={this.state.location}
                 handleSelectChange={this.handleLocationChange}
               />
             </Form.Field>
             <br />
-            <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
+            <Form.Field style={{textAlign: 'center', margin: '6px'}}>
               <Button
                 style={{
-                  backgroundColor: '#f2B8C6',
+                  backgroundColor: '#779CAB',
                   border: '3px solid rgba(255, 255, 255, .5)'
                 }}
                 type="submit"

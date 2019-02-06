@@ -8,7 +8,7 @@ const GroupCard = props => {
         divided
         selection
         style={{
-          backgroundColor: '#F5E2DE',
+          backgroundColor: '#32DE8A',
           borderRadius: '15px',
           border: '3px solid rgba(255, 255, 255, .5)',
           textAlign: 'center',

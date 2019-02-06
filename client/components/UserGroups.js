@@ -27,7 +27,7 @@ class UserGroups extends Component {
                   }
                   style={{
                     margin: '11px',
-                    backgroundColor: '#f2B8C6',
+                    backgroundColor: '#779CAB',
                     border: '3px solid rgba(255, 255, 255, .5)'
                   }}
                 >
