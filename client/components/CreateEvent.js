@@ -42,33 +42,53 @@ class CreateEvent extends Component {
   render() {
     return (
       <div>
-        <Segment style={{backgroundColor: '#f6a794'}}>
-          <Form onChange={this.handleChange}>
-            <Form.Group widths="equal">
-              <label>Create New Event</label>
-              <Form.Field>
-                <input
-                  placeholder="Event Name"
-                  name="name"
-                  value={this.state.name}
-                />
-              </Form.Field>
-              <Form.Field>
-                <input
-                  placeholder="Description"
-                  name="description"
-                  value={this.state.description}
-                />
-              </Form.Field>
-              <Form.Field>
-                <PlacesBar
-                  location={this.state.location}
-                  handleSelectChange={this.handleLocationChange}
-                />
-              </Form.Field>
-            </Form.Group>
+        <Segment
+          style={{
+            backgroundColor: '#f6a794',
+            border: '3px solid rgba(255, 255, 255, .5)',
+            borderTopRightRadius: '25px',
+            borderTopLeftRadius: '25px'
+          }}
+        >
+          <Form
+            onChange={this.handleChange}
+            style={{
+              textAlign: 'center',
+              margin: 'auto',
+              color: '#333333'
+            }}
+          >
+            <h2>Create New Event</h2>
+            <Form.Field style={{margin: '6px'}}>
+              <input
+                placeholder="Event Name"
+                name="name"
+                value={this.state.name}
+              />
+            </Form.Field>
+            <Form.Field style={{margin: '25px'}}>
+              <input
+                placeholder="Description"
+                name="description"
+                value={this.state.description}
+              />
+            </Form.Field>
             <Form.Field>
-              <Button color="blue" type="submit" onClick={this.handleSubmit}>
+              <PlacesBar
+                location={this.state.location}
+                handleSelectChange={this.handleLocationChange}
+              />
+            </Form.Field>
+            <br />
+            <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
+              <Button
+                style={{
+                  backgroundColor: '#f2B8C6',
+                  border: '3px solid rgba(255, 255, 255, .5)'
+                }}
+                type="submit"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </Button>
             </Form.Field>

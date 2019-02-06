@@ -15,7 +15,7 @@ const AuthForm = props => {
         textAlign: 'center',
         margin: 'auto',
         backgroundColor: '#f6a794',
-        borderRadius: '70px'
+        borderRadius: '15px'
       }}
     >
       <form onSubmit={handleSubmit} name={name}>
