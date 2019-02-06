@@ -30,21 +30,21 @@ async function seed() {
   const event1 = await Events.create({
     name: 'Dinner at OpenMarket',
     description: 'Meet up for fun cheap half off dinner',
-    location: '343 Hanover',
+    location: '15 William St, New York, NY 10005',
     votes: 0
   })
 
   const event2 = await Events.create({
-    name: 'Kilarny',
-    description: 'Shots!',
-    location: '7 Hanover',
+    name: 'Shopping for Shades at Soho!',
+    description: 'Shut up and take my money!',
+    location: '1515 Broadway, New York, NY 10036',
     votes: 0
   })
 
   const event3 = await Events.create({
-    name: 'Toms Restaurant',
-    description: 'Fun time, good food!',
-    location: '11 Hanover',
+    name: 'Movies!',
+    description: 'Popcorn and Butter please!',
+    location: '234 W 42nd St, New York, NY 10036',
     votes: 0
   })
 

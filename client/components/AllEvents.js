@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchAllEvents, deleteSingleEvent, decideEvent} from '../store/event'
 import EventCard from './EventCard'
+import MapCard from './MapCard'
 import {Button, Header} from 'semantic-ui-react'
 
 class AllEvents extends Component {
@@ -36,27 +37,53 @@ class AllEvents extends Component {
           </Header>
           <div>
             {events.map((activity, i) => {
-              return (
-                <div key={i} style={{padding: '20px', textAlign: 'center'}}>
-                  <EventCard
-                    activity={activity}
-                    key={activity.id}
-                    userId={this.props.userId}
-                  />
-                  <Button
-                    onClick={() =>
-                      this.props.deleteEvent(this.props.userId, activity.id)
-                    }
-                    style={{
-                      backgroundColor: '#f28d86',
-                      border: '3px solid rgba(255, 255, 255, .5)',
-                      margin: '11px'
-                    }}
-                  >
-                    Delete Event
-                  </Button>
-                </div>
-              )
+              if (activity.chosen === true) {
+                //Renders when event has been chosen
+                return (
+                  <div key={i} style={{padding: '20px', textAlign: 'center'}}>
+                    <EventCard
+                      activity={activity}
+                      key={activity.id}
+                      userId={this.props.userId}
+                    />
+                    <MapCard locationinfo={activity.location} />
+                    <Button
+                      onClick={() =>
+                        this.props.deleteEvent(this.props.userId, activity.id)
+                      }
+                      style={{
+                        backgroundColor: '#f28d86',
+                        border: '3px solid rgba(255, 255, 255, .5)',
+                        margin: '11px'
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                )
+              } else {
+                return (
+                  <div key={i} style={{padding: '20px', textAlign: 'center'}}>
+                    <EventCard
+                      activity={activity}
+                      key={activity.id}
+                      userId={this.props.userId}
+                    />
+                    <Button
+                      onClick={() =>
+                        this.props.deleteEvent(this.props.userId, activity.id)
+                      }
+                      style={{
+                        backgroundColor: '#f28d86',
+                        border: '3px solid rgba(255, 255, 255, .5)',
+                        margin: '11px'
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                )
+              }
             })}
           </div>
         </div>
