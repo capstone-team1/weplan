@@ -37,10 +37,8 @@ class UserGroups extends Component {
                   }
                   style={{
                     margin: '11px',
-                    backgroundColor: '#f2B8C6',
-                    border: '3px solid rgba(255, 255, 255, .5)',
-                    padding: '.5em',
-                    borderRadius: '7px'
+                    backgroundColor: '#779CAB',
+                    border: '3px solid rgba(255, 255, 255, .5)'
                   }}
                 >
                   Delete Group

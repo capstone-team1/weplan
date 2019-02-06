@@ -44,7 +44,7 @@ class CreateEvent extends Component {
       <div>
         <Segment
           style={{
-            backgroundColor: '#f6a794',
+            backgroundColor: '#A2E8DD',
             border: '3px solid rgba(255, 255, 255, .5)',
             borderTopRightRadius: '25px',
             borderTopLeftRadius: '25px'
@@ -83,7 +83,7 @@ class CreateEvent extends Component {
             <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
               <Button
                 style={{
-                  backgroundColor: 'instagram',
+                  backgroundColor: '#779CAB',
                   border: '3px solid rgba(255, 255, 255, .5)'
                 }}
                 type="submit"

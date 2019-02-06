@@ -8,20 +8,7 @@ const EventCard = props => {
 
   return (
     <div key={activity.id}>
-      <List
-        divided
-        selection
-        style={{
-          backgroundColor: '#F5E2DE',
-          borderRadius: '15px',
-          paddingRight: '15%',
-          paddingLeft: '15%',
-          marginLeft: '25%',
-          marginRight: '25%',
-          textAlign: 'center',
-          border: '9px solid rgba(255, 255, 255, .5)'
-        }}
-      >
+      <List divided selection id="event-card">
         <List.Item>
           <Label color="grey" horizontal>
             Name

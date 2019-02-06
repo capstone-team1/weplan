@@ -32,11 +32,8 @@ class CreateGroup extends Component {
   render() {
     return (
       <div>
-        <Segment style={{backgroundColor: '#f1ddcf'}}>
-          <Form
-            onChange={this.handleChange}
-            style={{backgroundColor: '#F5E2DE'}}
-          >
+        <Segment style={{backgroundColor: '#A2E8DD'}}>
+          <Form onChange={this.handleChange}>
             <Form.Group widths="equal">
               <label>Create New Group</label>
               <Form.Field>
@@ -54,8 +51,18 @@ class CreateGroup extends Component {
                 />
               </Form.Field>
             </Form.Group>
-            <Form.Field>
-              <Button color="blue" type="submit" onClick={this.handleSubmit}>
+            <Form.Field style={{textAlign: 'center'}}>
+              <Button
+                color="blue"
+                type="submit"
+                onClick={this.handleSubmit}
+                style={{
+                  backgroundColor: '#779CAB',
+                  color: '#333333',
+                  textAlign: 'center',
+                  border: '3px solid rgba(255, 255, 255, .5)'
+                }}
+              >
                 Submit
               </Button>
             </Form.Field>

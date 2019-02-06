@@ -10,9 +10,13 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     <h1
       style={{
         textAlign: 'center',
-        color: '#333333',
         border: '3px solid rgba(255, 255, 255, .5)',
-        backgroundColor: '#FFCBA4'
+        color: '#35524A',
+        backgroundColor: '#A2E8DD',
+        borderBottomRightRadius: '15px',
+        borderBottomLeftRadius: '15px',
+        marginLeft: '30%',
+        marginRight: '30%'
       }}
     >
       WePlan
@@ -25,9 +29,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Menu
             widths={4}
             style={{
-              backgroundColor: '#f6a794',
-              borderBottomRightRadius: '25px',
-              borderBottomLeftRadius: '25px',
+              backgroundColor: '#779CAB',
+              borderRadius: '25px',
               border: '3px solid rgba(255, 255, 255, .5)'
             }}
           >
@@ -36,7 +39,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Button
                   style={{
                     border: '3px solid rgba(255, 255, 255, .5)',
-                    backgroundColor: '#FFCBA4'
+                    backgroundColor: '#A2E8DD'
                   }}
                 >
                   <Icon name="home" />
@@ -49,7 +52,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Button
                   style={{
                     border: '3px solid rgba(255, 255, 255, .5)',
-                    backgroundColor: '#FFCBA4'
+                    backgroundColor: '#A2E8DD'
                   }}
                 >
                   <Icon name="plus square" />Join Group
@@ -62,7 +65,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 <Button
                   style={{
                     border: '3px solid rgba(255, 255, 255, .5)',
-                    backgroundColor: '#FFCBA4'
+                    backgroundColor: '#A2E8DD'
                   }}
                 >
                   <Icon name="group" />My Groups
@@ -75,7 +78,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                 onClick={handleClick}
                 style={{
                   border: '3px solid rgba(255, 255, 255, .5)',
-                  backgroundColor: '#FFCBA4'
+                  backgroundColor: '#A2E8DD'
                 }}
               >
                 <Icon name="log out" />Logout

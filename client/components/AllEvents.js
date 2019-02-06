@@ -31,7 +31,14 @@ class AllEvents extends Component {
         <div>
           <Header
             as="h1"
-            style={{textAlign: 'center', margin: 'auto', color: '#f2B8C6'}}
+            style={{
+              textAlign: 'center',
+              marginLeft: '35%',
+              marginRight: '35%',
+              borderRadius: '15px',
+              color: '#35524A',
+              backgroundColor: '#A2E8DD'
+            }}
           >
             Vote
           </Header>
@@ -48,14 +55,10 @@ class AllEvents extends Component {
                     />
                     <MapCard locationinfo={activity.location} />
                     <Button
+                      id="delete-event"
                       onClick={() =>
                         this.props.deleteEvent(this.props.userId, activity.id)
                       }
-                      style={{
-                        backgroundColor: '#f28d86',
-                        border: '3px solid rgba(255, 255, 255, .5)',
-                        margin: '11px'
-                      }}
                     >
                       Delete
                     </Button>
@@ -96,7 +99,7 @@ class AllEvents extends Component {
           <Button
             onClick={this.handleClick}
             style={{
-              backgroundColor: '#f1ddcf',
+              backgroundColor: '#779CAB',
               border: '3px solid rgba(255, 255, 255, .5)',
               margin: '11px'
             }}
