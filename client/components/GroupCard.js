@@ -10,12 +10,12 @@ const GroupCard = props => {
         style={{
           backgroundColor: '#32DE8A',
           borderRadius: '15px',
-          border: '3px solid rgba(255, 255, 255, .5)',
+          border: '5px solid rgba(255, 255, 255, .5)',
           textAlign: 'center',
           paddingRight: '15%',
           paddingLeft: '15%',
-          marginLeft: 'auto',
-          marginRight: 'auto'
+          marginLeft: '25%',
+          marginRight: '25%'
         }}
       >
         <List.Item>
