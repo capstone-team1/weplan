@@ -58,6 +58,28 @@ class AllEvents extends Component {
                     </Button>
                   </div>
                 )
+              } else {
+                return (
+                  <div key={i} style={{padding: '20px', textAlign: 'center'}}>
+                    <EventCard
+                      activity={activity}
+                      key={activity.id}
+                      userId={this.props.userId}
+                    />
+                    <Button
+                      onClick={() =>
+                        this.props.deleteEvent(this.props.userId, activity.id)
+                      }
+                      style={{
+                        backgroundColor: '#f2B8C6',
+                        border: '5px solid rgba(255, 255, 255, .5)',
+                        margin: '11px'
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                )
               }
             })}
           </div>
