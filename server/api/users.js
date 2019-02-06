@@ -249,12 +249,18 @@ router.put('/:groupId/decideEvent', async (req, res, next) => {
         votes: topVotesNum
       }
     })
+
+    bestEvent[0].update({
+      chosen: true
+    })
+
     await Events.destroy({
       where: {
         id: {[Op.ne]: bestEvent[0].id}
       }
     })
 
+    //NodeMailer
     const members = await Group.findAll({
       where: {id: groupId},
       include: {model: User, attributes: ['email']}
