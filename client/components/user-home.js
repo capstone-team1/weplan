@@ -32,6 +32,15 @@ export const UserHome = props => {
           Once an event is decided, an email reminder will be sent to your inbox
         </p>
         <Image
+          style={{
+            textAlign: 'center',
+            marginBottom: '10%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            padding: '.5em',
+            borderRadius: '7px',
+            border: '3px solid rgba(255, 255, 255, .5)'
+          }}
           src="https://i2.wp.com/sydneyrockies.org.au/wp-content/uploads/2018/12/SRC-Committee2018-19.jpg?resize=768%2C576"
           size="large"
         />
