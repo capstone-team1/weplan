@@ -235,6 +235,29 @@ router.put('/:userId/groups/:groupId', async (req, res, next) => {
   }
 })
 
+//route for Invite Join Group Through URL GENERATED link
+router.get('/join/:groupUrl', async (req, res, next) => {
+  console.log('hit the correct link')
+  try {
+    const userId = Number(req.user.id)
+    const groupUrl = req.params.groupUrl
+
+    const currentGroup = await Group.findOne({where: {linkId: groupUrl}})
+    const currentUser = await User.findById(userId)
+
+    await currentGroup.addUser(currentUser)
+
+    const allEventsForGroup = await Events.findAll({
+      where: {groupId: currentGroup.id}
+    })
+    currentUser.addEvents(allEventsForGroup)
+    res.redirect('/groups')
+    // res.send('User has joined the group successfully!')
+  } catch (err) {
+    next(err)
+  }
+})
+
 //Decides the event (time out currently used in front end)
 router.put('/:groupId/decideEvent', async (req, res, next) => {
   const groupId = Number(req.params.groupId)
