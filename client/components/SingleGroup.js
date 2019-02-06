@@ -3,11 +3,12 @@ import {connect} from 'react-redux'
 import {AllEvents, CreateEvent} from './index'
 import {fetchSingleGroup} from '../store/index'
 import {Button} from 'semantic-ui-react'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 class SingleGroup extends Component {
   constructor() {
     super()
-    this.state = {link: ''}
+    this.state = {link: '', copied: false}
     this.generateLink = this.generateLink.bind(this)
   }
   componentDidMount() {
@@ -40,9 +41,13 @@ class SingleGroup extends Component {
           <Button basic color="teal" onClick={this.generateLink}>
             Invite Link
           </Button>
-          <div className="link">
-            <p>{this.state.link}</p>
-          </div>
+          <CopyToClipboard
+            text={this.state.link}
+            onCopy={() => this.setState({copied: true})}
+          >
+            <input className="link" value={this.state.link} />
+          </CopyToClipboard>
+          {this.state.copied ? alert('invite link has been copied') : null}
         </div>
       </div>
     )
