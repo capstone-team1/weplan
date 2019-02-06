@@ -31,32 +31,37 @@ class CreateGroup extends Component {
   }
   render() {
     return (
-      <Segment>
-        <Form onChange={this.handleChange}>
-          <Form.Group widths="equal">
-            <label>Create New Group</label>
+      <div>
+        <Segment style={{backgroundColor: '#f1ddcf'}}>
+          <Form
+            onChange={this.handleChange}
+            style={{backgroundColor: '#F5E2DE'}}
+          >
+            <Form.Group widths="equal">
+              <label>Create New Group</label>
+              <Form.Field>
+                <input
+                  placeholder="Group Name"
+                  name="name"
+                  value={this.state.name}
+                />
+              </Form.Field>
+              <Form.Field>
+                <input
+                  placeholder="Description"
+                  name="description"
+                  value={this.state.description}
+                />
+              </Form.Field>
+            </Form.Group>
             <Form.Field>
-              <input
-                placeholder="Group Name"
-                name="name"
-                value={this.state.name}
-              />
+              <Button color="blue" type="submit" onClick={this.handleSubmit}>
+                Submit
+              </Button>
             </Form.Field>
-            <Form.Field>
-              <input
-                placeholder="Description"
-                name="description"
-                value={this.state.description}
-              />
-            </Form.Field>
-          </Form.Group>
-          <Form.Field>
-            <Button color="blue" type="submit" onClick={this.handleSubmit}>
-              Submit
-            </Button>
-          </Form.Field>
-        </Form>
-      </Segment>
+          </Form>
+        </Segment>
+      </div>
     )
   }
 }

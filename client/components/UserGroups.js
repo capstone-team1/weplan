@@ -17,7 +17,7 @@ class UserGroups extends Component {
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <div key={name}>
+              <div key={name} style={{padding: '20px', textAlign: 'center'}}>
                 <Link to={`/group/${id}`}>
                   <GroupCard name={name} description={description} />
                 </Link>
