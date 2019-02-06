@@ -23,6 +23,7 @@ export default class PlacesBar extends Component {
     const {search, value} = this.state
     return (
       <ReactGoogleMapLoader
+        style={{textAlign: 'center', margin: '6px'}}
         params={{
           key: GOOGLE_PLACES_API,
           libraries: 'places,geocode'
