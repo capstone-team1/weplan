@@ -29,7 +29,10 @@ class AllEvents extends Component {
     return (
       <div>
         <div>
-          <Header as="h2" style={{textAlign: 'center', margin: 'auto'}}>
+          <Header
+            as="h1"
+            style={{textAlign: 'center', margin: 'auto', color: '#f2B8C6'}}
+          >
             Vote
           </Header>
           <div>
@@ -49,8 +52,8 @@ class AllEvents extends Component {
                         this.props.deleteEvent(this.props.userId, activity.id)
                       }
                       style={{
-                        backgroundColor: '#f2B8C6',
-                        border: '5px solid rgba(255, 255, 255, .5)',
+                        backgroundColor: '#f28d86',
+                        border: '3px solid rgba(255, 255, 255, .5)',
                         margin: '11px'
                       }}
                     >
@@ -71,8 +74,8 @@ class AllEvents extends Component {
                         this.props.deleteEvent(this.props.userId, activity.id)
                       }
                       style={{
-                        backgroundColor: '#f2B8C6',
-                        border: '5px solid rgba(255, 255, 255, .5)',
+                        backgroundColor: '#f28d86',
+                        border: '3px solid rgba(255, 255, 255, .5)',
                         margin: '11px'
                       }}
                     >
@@ -92,7 +95,11 @@ class AllEvents extends Component {
         >
           <Button
             onClick={this.handleClick}
-            style={{backgroundColor: '#f1ddcf'}}
+            style={{
+              backgroundColor: '#f1ddcf',
+              border: '3px solid rgba(255, 255, 255, .5)',
+              margin: '11px'
+            }}
           >
             Start Decider Countdown- 10 seconds
           </Button>

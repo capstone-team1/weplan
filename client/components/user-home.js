@@ -11,17 +11,24 @@ export const UserHome = props => {
 
   return (
     <div>
-      <Header as="h2" icon textAlign="center">
-        <Header.Content>Welcome, To WePlan {email}</Header.Content>
+      <Header
+        as="h2"
+        style={{color: '#FFFBF3', textAlign: 'center', marginBottom: '5%'}}
+      >
+        Welcome, {email}
       </Header>
       <Container fluid>
-        <Header as="h2">Create Groups and Events </Header>
-        <p>Click on join group to see all available groups</p>
-        <p>
+        <Header as="h2" style={{color: '#FFFBF3', textAlign: 'center'}}>
+          Create groups and events{' '}
+        </Header>
+        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
+          Click on join group to see all available groups
+        </p>
+        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
           My groups has all of your current groups. Once inside feel free to
           create new groups and events
         </p>
-        <p>
+        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
           Once an event is decided, an email reminder will be sent to your inbox
         </p>
         <Image
