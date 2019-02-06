@@ -77,12 +77,12 @@ class AllEvents extends Component {
                         this.props.deleteEvent(this.props.userId, activity.id)
                       }
                       style={{
-                        backgroundColor: '#f28d86',
+                        backgroundColor: '#A2E8DD',
                         border: '3px solid rgba(255, 255, 255, .5)',
                         margin: '11px'
                       }}
                     >
-                      Delete
+                      Delete Event
                     </Button>
                   </div>
                 )

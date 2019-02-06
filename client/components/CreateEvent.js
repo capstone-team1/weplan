@@ -66,21 +66,21 @@ class CreateEvent extends Component {
                 value={this.state.name}
               />
             </Form.Field>
-            <Form.Field style={{margin: '25px'}}>
+            <Form.Field style={{margin: '6px'}}>
               <input
                 placeholder="Description"
                 name="description"
                 value={this.state.description}
               />
             </Form.Field>
-            <Form.Field>
+            <Form.Field style={{margin: '6px'}}>
               <PlacesBar
                 location={this.state.location}
                 handleSelectChange={this.handleLocationChange}
               />
             </Form.Field>
             <br />
-            <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
+            <Form.Field style={{textAlign: 'center'}}>
               <Button
                 style={{
                   backgroundColor: '#779CAB',
