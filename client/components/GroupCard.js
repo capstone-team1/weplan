@@ -10,7 +10,7 @@ const GroupCard = props => {
         style={{
           backgroundColor: '#F5E2DE',
           borderRadius: '15px',
-          border: '5px solid rgba(255, 255, 255, .5)',
+          border: '3px solid rgba(255, 255, 255, .5)',
           textAlign: 'center',
           paddingRight: '15%',
           paddingLeft: '15%',

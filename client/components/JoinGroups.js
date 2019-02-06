@@ -22,7 +22,7 @@ class JoinGroups extends Component {
                 style={{
                   margin: '11px',
                   backgroundColor: '#f2B8C6',
-                  border: '5px solid rgba(255, 255, 255, .5)'
+                  border: '3px solid rgba(255, 255, 255, .5)'
                 }}
               >
                 Join group
