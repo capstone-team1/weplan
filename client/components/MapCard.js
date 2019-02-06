@@ -1,4 +1,5 @@
 import React from 'react'
+import {mapKey} from '../../secrets'
 
 const MapCard = props => {
   let location = props.locationinfo
@@ -9,7 +10,7 @@ const MapCard = props => {
       src={`https://maps.googleapis.com/maps/api/staticmap?center=${location}
         &zoom=18&size=600x300&maptype=roadmap
         &markers=color:red%7Clabel:C%7C${location}
-        &key=`}
+        &key=${mapKey}`}
     />
   )
 }
