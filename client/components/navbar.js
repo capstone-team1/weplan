@@ -18,12 +18,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             style={{
               backgroundColor: '#f6a794',
               borderRadius: '25px',
-              border: '5px solid rgba(255, 255, 255, .5)'
+              border: '3px solid rgba(255, 255, 255, .5)'
             }}
           >
             <Menu.Item>
               <NavLink to="/home">
-                <Button style={{backgroundColor: '#FFCBA4'}}>
+                <Button
+                  style={{
+                    border: '3px solid rgba(255, 255, 255, .5)',
+                    backgroundColor: '#FFCBA4'
+                  }}
+                >
                   <Icon name="home" />
                 </Button>
               </NavLink>
@@ -31,7 +36,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
             <Menu.Item>
               <Link to="/join">
-                <Button style={{backgroundColor: '#FFCBA4'}}>
+                <Button
+                  style={{
+                    border: '3px solid rgba(255, 255, 255, .5)',
+                    backgroundColor: '#FFCBA4'
+                  }}
+                >
                   <Icon name="plus square" />Join Group
                 </Button>
               </Link>
@@ -39,7 +49,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
             <Menu.Item>
               <Link to="/groups">
-                <Button style={{backgroundColor: '#FFCBA4'}}>
+                <Button
+                  style={{
+                    border: '3px solid rgba(255, 255, 255, .5)',
+                    backgroundColor: '#FFCBA4'
+                  }}
+                >
                   <Icon name="group" />My Groups
                 </Button>
               </Link>
@@ -48,7 +63,10 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             <Menu.Item>
               <Button
                 onClick={handleClick}
-                style={{backgroundColor: '#FFCBA4'}}
+                style={{
+                  border: '3px solid rgba(255, 255, 255, .5)',
+                  backgroundColor: '#FFCBA4'
+                }}
               >
                 <Icon name="log out" />Logout
               </Button>

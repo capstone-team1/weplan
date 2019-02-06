@@ -46,7 +46,7 @@ class AllEvents extends Component {
                     }
                     style={{
                       backgroundColor: '#f2B8C6',
-                      border: '5px solid rgba(255, 255, 255, .5)',
+                      border: '3px solid rgba(255, 255, 255, .5)',
                       margin: '11px'
                     }}
                   >
@@ -65,7 +65,11 @@ class AllEvents extends Component {
         >
           <Button
             onClick={this.handleClick}
-            style={{backgroundColor: '#f1ddcf'}}
+            style={{
+              backgroundColor: '#f1ddcf',
+              border: '3px solid rgba(255, 255, 255, .5)',
+              margin: '11px'
+            }}
           >
             Start Decider Countdown- 10 seconds
           </Button>
