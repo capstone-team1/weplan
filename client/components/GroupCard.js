@@ -9,8 +9,13 @@ const GroupCard = props => {
         selection
         style={{
           backgroundColor: '#F5E2DE',
-          borderRadius: '70px',
-          textAlign: 'center'
+          borderRadius: '15px',
+          border: '5px solid rgba(255, 255, 255, .5)',
+          textAlign: 'center',
+          paddingRight: '15%',
+          paddingLeft: '15%',
+          marginLeft: '25%',
+          marginRight: '25%'
         }}
       >
         <List.Item>

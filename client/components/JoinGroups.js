@@ -19,6 +19,11 @@ class JoinGroups extends Component {
               <GroupCard name={name} description={description} groupId={id} />
               <Button
                 onClick={() => this.props.joinIntoGroup(this.props.id, id)}
+                style={{
+                  margin: '11px',
+                  backgroundColor: '#f2B8C6',
+                  border: '5px solid rgba(255, 255, 255, .5)'
+                }}
               >
                 Join group
               </Button>
