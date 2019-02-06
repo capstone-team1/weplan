@@ -19,7 +19,7 @@ const EventCard = props => {
           marginLeft: '25%',
           marginRight: '25%',
           textAlign: 'center',
-          border: '3px solid rgba(255, 255, 255, .5)'
+          border: '9px solid rgba(255, 255, 255, .5)'
         }}
       >
         <List.Item>

@@ -42,13 +42,24 @@ class CreateEvent extends Component {
   render() {
     return (
       <div>
-        <Segment style={{backgroundColor: '#f6a794'}}>
+        <Segment
+          style={{
+            backgroundColor: '#f6a794',
+            border: '3px solid rgba(255, 255, 255, .5)',
+            borderTopRightRadius: '25px',
+            borderTopLeftRadius: '25px'
+          }}
+        >
           <Form
             onChange={this.handleChange}
-            style={{textAlign: 'center', margin: 'auto'}}
+            style={{
+              textAlign: 'center',
+              margin: 'auto',
+              color: '#333333'
+            }}
           >
-            <label>Create New Event</label>
-            <Form.Field style={{margin: '25px'}}>
+            <h2>Create New Event</h2>
+            <Form.Field style={{margin: '6px'}}>
               <input
                 placeholder="Event Name"
                 name="name"
@@ -70,7 +81,14 @@ class CreateEvent extends Component {
             </Form.Field>
             <br />
             <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
-              <Button color="blue" type="submit" onClick={this.handleSubmit}>
+              <Button
+                style={{
+                  backgroundColor: '#f2B8C6',
+                  border: '3px solid rgba(255, 255, 255, .5)'
+                }}
+                type="submit"
+                onClick={this.handleSubmit}
+              >
                 Submit
               </Button>
             </Form.Field>

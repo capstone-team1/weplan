@@ -7,7 +7,16 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1 style={{textAlign: 'center'}}>WePlan</h1>
+    <h1
+      style={{
+        textAlign: 'center',
+        color: '#333333',
+        border: '3px solid rgba(255, 255, 255, .5)',
+        backgroundColor: '#FFCBA4'
+      }}
+    >
+      WePlan
+    </h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -17,7 +26,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
             widths={4}
             style={{
               backgroundColor: '#f6a794',
-              borderRadius: '25px',
+              borderBottomRightRadius: '25px',
+              borderBottomLeftRadius: '25px',
               border: '3px solid rgba(255, 255, 255, .5)'
             }}
           >
