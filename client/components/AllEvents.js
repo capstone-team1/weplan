@@ -34,14 +34,7 @@ class AllEvents extends Component {
           <div>
             {events.map((activity, i) => {
               return (
-                <div
-                  key={i}
-                  style={{
-                    textAlign: 'center',
-                    margin: 'auto',
-                    padding: '20px'
-                  }}
-                >
+                <div key={i} style={{padding: '20px', textAlign: 'center'}}>
                   <EventCard
                     activity={activity}
                     key={activity.id}
@@ -51,7 +44,11 @@ class AllEvents extends Component {
                     onClick={() =>
                       this.props.deleteEvent(this.props.userId, activity.id)
                     }
-                    style={{backgroundColor: '#f2B8C6'}}
+                    style={{
+                      backgroundColor: '#f2B8C6',
+                      border: '5px solid rgba(255, 255, 255, .5)',
+                      margin: '11px'
+                    }}
                   >
                     Delete
                   </Button>

@@ -15,7 +15,11 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
           <Menu
             widths={4}
-            style={{backgroundColor: '#f6a794', borderRadius: '25px'}}
+            style={{
+              backgroundColor: '#f6a794',
+              borderRadius: '25px',
+              border: '5px solid rgba(255, 255, 255, .5)'
+            }}
           >
             <Menu.Item>
               <NavLink to="/home">
