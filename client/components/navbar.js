@@ -7,16 +7,19 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>WePlan</h1>
+    <h1 style={{textAlign: 'center'}}>WePlan</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
 
-          <Menu widths={4}>
+          <Menu
+            widths={4}
+            style={{backgroundColor: '#f6a794', borderRadius: '25px'}}
+          >
             <Menu.Item>
               <NavLink to="/home">
-                <Button>
+                <Button style={{backgroundColor: '#FFCBA4'}}>
                   <Icon name="home" />
                 </Button>
               </NavLink>
@@ -24,7 +27,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
             <Menu.Item>
               <Link to="/join">
-                <Button>
+                <Button style={{backgroundColor: '#FFCBA4'}}>
                   <Icon name="plus square" />Join Group
                 </Button>
               </Link>
@@ -32,14 +35,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 
             <Menu.Item>
               <Link to="/groups">
-                <Button>
+                <Button style={{backgroundColor: '#FFCBA4'}}>
                   <Icon name="group" />My Groups
                 </Button>
               </Link>
             </Menu.Item>
 
             <Menu.Item>
-              <Button onClick={handleClick}>
+              <Button
+                onClick={handleClick}
+                style={{backgroundColor: '#FFCBA4'}}
+              >
                 <Icon name="log out" />Logout
               </Button>
             </Menu.Item>

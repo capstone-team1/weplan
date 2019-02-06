@@ -1,9 +1,11 @@
 body {
   font-family: sans-serif;
+  background-color: coral;
 }
 
 a {
   text-decoration: none;
+  background-color: coral;
 }
 
 label {
@@ -18,4 +20,34 @@ nav a {
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.create-event {
+  padding: 70px;
+}
+
+.create-group {
+  padding: 70px;
+}
+
+.event-card {
+  padding: 70px;
+  margin: auto;
+}
+
+#all-events {
+  padding: 70px;
+  margin: auto;
+}
+
+.group-card {
+  padding: 70px;
+}
+
+.delete-event {
+  margin: auto;
+}
+
+.delete-group {
+  margin: auto;
 }

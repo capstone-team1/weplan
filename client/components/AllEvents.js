@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchAllEvents, deleteSingleEvent, decideEvent} from '../store/event'
 import EventCard from './EventCard'
-import {Button} from 'react-bootstrap'
+import {Button, Header} from 'semantic-ui-react'
 
 class AllEvents extends Component {
   constructor() {
@@ -26,33 +26,53 @@ class AllEvents extends Component {
   render() {
     const {events} = this.props
     return (
-      <div id="all-events">
-        <h3>Vote on your favorite Event!</h3>
+      <div>
         <div>
-          {events.map((activity, i) => {
-            return (
-              <div key={i}>
-                <EventCard
-                  activity={activity}
-                  key={activity.id}
-                  userId={this.props.userId}
-                />
-                <Button
-                  onClick={() =>
-                    this.props.deleteEvent(this.props.userId, activity.id)
-                  }
+          <Header as="h2" style={{textAlign: 'center', margin: 'auto'}}>
+            Vote
+          </Header>
+          <div>
+            {events.map((activity, i) => {
+              return (
+                <div
+                  key={i}
+                  style={{
+                    textAlign: 'center',
+                    margin: 'auto',
+                    padding: '20px'
+                  }}
                 >
-                  Delete
-                </Button>
-              </div>
-            )
-          })}
+                  <EventCard
+                    activity={activity}
+                    key={activity.id}
+                    userId={this.props.userId}
+                  />
+                  <Button
+                    onClick={() =>
+                      this.props.deleteEvent(this.props.userId, activity.id)
+                    }
+                    style={{backgroundColor: '#f2B8C6'}}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              )
+            })}
+          </div>
         </div>
-        <br />
-        <br />
-        <Button onClick={this.handleClick}>
-          Start Decider Countdown- 10 seconds
-        </Button>
+        <div
+          style={{
+            textAlign: 'center',
+            margin: 'auto'
+          }}
+        >
+          <Button
+            onClick={this.handleClick}
+            style={{backgroundColor: '#f1ddcf'}}
+          >
+            Start Decider Countdown- 10 seconds
+          </Button>
+        </div>
       </div>
     )
   }
