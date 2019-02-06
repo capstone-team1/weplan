@@ -15,14 +15,19 @@ class JoinGroups extends Component {
       <div>
         {groups.map(({id, name, description}) => {
           return (
-            <Segment key={name}>
+            <div key={name} style={{padding: '20px', textAlign: 'center'}}>
               <GroupCard name={name} description={description} groupId={id} />
               <Button
                 onClick={() => this.props.joinIntoGroup(this.props.id, id)}
+                style={{
+                  margin: '11px',
+                  backgroundColor: '#f2B8C6',
+                  border: '5px solid rgba(255, 255, 255, .5)'
+                }}
               >
                 Join group
               </Button>
-            </Segment>
+            </div>
           )
         })}
       </div>

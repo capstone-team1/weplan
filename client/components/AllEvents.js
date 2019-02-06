@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {fetchAllEvents, deleteSingleEvent, decideEvent} from '../store/event'
 import EventCard from './EventCard'
-import {Button} from 'react-bootstrap'
 import MapCard from './MapCard'
+import {Button, Header} from 'semantic-ui-react'
 
 class AllEvents extends Component {
   constructor() {
@@ -27,55 +27,54 @@ class AllEvents extends Component {
   render() {
     const {events} = this.props
     return (
-      <div id="all-events">
-        <h3>Vote on your favorite Event!</h3>
+      <div>
         <div>
-          {events.map((activity, i) => {
-            if (activity.chosen === true) {
-              //Renders when event has been chosen
-              return (
-                <div key={i}>
-                  <EventCard
-                    activity={activity}
-                    key={activity.id}
-                    userId={this.props.userId}
-                  />
-                  <MapCard locationinfo={activity.location} />
-                  <Button
-                    onClick={() =>
-                      this.props.deleteEvent(this.props.userId, activity.id)
-                    }
-                  >
-                    Delete
-                  </Button>
-                </div>
-              )
-            } else {
-              //Renders normally (All events at once) BEFORE any event is chosen
-              return (
-                <div key={i}>
-                  <EventCard
-                    activity={activity}
-                    key={activity.id}
-                    userId={this.props.userId}
-                  />
-                  <Button
-                    onClick={() =>
-                      this.props.deleteEvent(this.props.userId, activity.id)
-                    }
-                  >
-                    Delete
-                  </Button>
-                </div>
-              )
-            }
-          })}
+          <Header as="h2" style={{textAlign: 'center', margin: 'auto'}}>
+            Vote
+          </Header>
+          <div>
+            {events.map((activity, i) => {
+              if (activity.chosen === true) {
+                //Renders when event has been chosen
+                return (
+                  <div key={i} style={{padding: '20px', textAlign: 'center'}}>
+                    <EventCard
+                      activity={activity}
+                      key={activity.id}
+                      userId={this.props.userId}
+                    />
+                    <MapCard locationinfo={activity.location} />
+                    <Button
+                      onClick={() =>
+                        this.props.deleteEvent(this.props.userId, activity.id)
+                      }
+                      style={{
+                        backgroundColor: '#f2B8C6',
+                        border: '5px solid rgba(255, 255, 255, .5)',
+                        margin: '11px'
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                )
+              }
+            })}
+          </div>
         </div>
-        <br />
-        <br />
-        <Button onClick={this.handleClick}>
-          Start Decider Countdown- 10 seconds
-        </Button>
+        <div
+          style={{
+            textAlign: 'center',
+            margin: 'auto'
+          }}
+        >
+          <Button
+            onClick={this.handleClick}
+            style={{backgroundColor: '#f1ddcf'}}
+          >
+            Start Decider Countdown- 10 seconds
+          </Button>
+        </div>
       </div>
     )
   }

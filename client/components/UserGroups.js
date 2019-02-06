@@ -17,7 +17,7 @@ class UserGroups extends Component {
         <div>
           {groups.map(({id, name, description}) => {
             return (
-              <div key={name}>
+              <div key={name} style={{padding: '20px', textAlign: 'center'}}>
                 <Link to={`/group/${id}`}>
                   <GroupCard name={name} description={description} />
                 </Link>
@@ -25,6 +25,11 @@ class UserGroups extends Component {
                   onClick={() =>
                     this.props.removeSingleGroup(id, this.props.id)
                   }
+                  style={{
+                    margin: '11px',
+                    backgroundColor: '#f2B8C6',
+                    border: '5px solid rgba(255, 255, 255, .5)'
+                  }}
                 >
                   Delete Group
                 </Button>

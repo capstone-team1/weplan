@@ -7,8 +7,21 @@ const EventCard = props => {
   const activity = props.activity
 
   return (
-    <div id="event-card" key={activity.id}>
-      <List divided selection>
+    <div key={activity.id}>
+      <List
+        divided
+        selection
+        style={{
+          backgroundColor: '#F5E2DE',
+          borderRadius: '15px',
+          paddingRight: '15%',
+          paddingLeft: '15%',
+          marginLeft: '25%',
+          marginRight: '25%',
+          textAlign: 'center',
+          border: '5px solid rgba(255, 255, 255, .5)'
+        }}
+      >
         <List.Item>
           <Label color="grey" horizontal>
             Name
@@ -29,11 +42,14 @@ const EventCard = props => {
         </List.Item>
         <List.Item>
           <Button as="div" labelPosition="right">
-            <Button color="red" onClick={() => props.changeVote(activity.id)}>
+            <Button
+              color="#FEDCAC"
+              onClick={() => props.changeVote(activity.id)}
+            >
               <Icon name="heart" />
               Vote
             </Button>
-            <Label as="a" basic color="red" pointing="left">
+            <Label as="a" basic color="#FEDCAC" pointing="left">
               {activity.votes}
             </Label>
           </Button>
