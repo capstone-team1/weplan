@@ -55,7 +55,7 @@ class CreateEvent extends Component {
             style={{
               textAlign: 'center',
               margin: 'auto',
-              color: '#35524A'
+              color: '#333333'
             }}
           >
             <h2>Create New Event</h2>
@@ -66,21 +66,21 @@ class CreateEvent extends Component {
                 value={this.state.name}
               />
             </Form.Field>
-            <Form.Field style={{margin: '6px'}}>
+            <Form.Field style={{margin: '25px'}}>
               <input
                 placeholder="Description"
                 name="description"
                 value={this.state.description}
               />
             </Form.Field>
-            <Form.Field style={{textAlign: 'center', margin: '6px'}}>
+            <Form.Field>
               <PlacesBar
                 location={this.state.location}
                 handleSelectChange={this.handleLocationChange}
               />
             </Form.Field>
             <br />
-            <Form.Field style={{textAlign: 'center', margin: '6px'}}>
+            <Form.Field style={{textAlign: 'center', margin: 'auto'}}>
               <Button
                 style={{
                   backgroundColor: '#779CAB',
