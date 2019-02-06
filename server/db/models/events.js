@@ -20,6 +20,10 @@ const Events = db.define('events', {
   votes: {
     type: Sequelize.INTEGER,
     defaultValue: 0
+  },
+  chosen: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
 
