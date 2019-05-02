@@ -1,68 +1,46 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {Header, Grid, Container, Image} from 'semantic-ui-react'
+import React, {Component} from 'react'
+import Axios from 'axios'
+export default class UserHome extends Component {
+  constructor() {
+    super()
+    this.state = {
+      weather: 'weather'
+    }
+    // this.handleChange = this.handleChange.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
+    // this.handleLocationChange = this.handleLocationChange.bind(this)
+  }
+  async componentDidMount() {
+    try {
+      let data = await Axios.get(
+        'http://api.openweathermap.org/data/2.5/weather?q=boston&APPID=92a8da4b7e887ff28d9945c617bd10e8'
+      )
+      this.setState({weather: data.data.weather[0].description})
+      console.log(data)
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
-/**
- * COMPONENT
- */
-export const UserHome = props => {
-  const {email} = props
-
-  return (
-    <div>
-      <Header
-        as="h2"
-        style={{color: '#FFFBF3', textAlign: 'center', marginBottom: '5%'}}
-      >
-        Welcome, {email}
-      </Header>
-      <Container fluid>
-        <Header as="h2" style={{color: '#FFFBF3', textAlign: 'center'}}>
-          Create groups and events{' '}
-        </Header>
-        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
-          Click on join group to see all available groups
-        </p>
-        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
-          My groups has all of your current groups. Once inside feel free to
-          create new groups and events
-        </p>
-        <p style={{color: '#FFFBF3', textAlign: 'center'}}>
-          Once an event is decided, an email reminder will be sent to your inbox
-        </p>
-        <Image
-          style={{
-            textAlign: 'center',
-            marginBottom: '10%',
-            marginLeft: 'auto',
-            marginRight: 'auto',
-            padding: '.5em',
-            borderRadius: '7px',
-            border: '3px solid rgba(255, 255, 255, .5)'
-          }}
-          src="https://i2.wp.com/sydneyrockies.org.au/wp-content/uploads/2018/12/SRC-Committee2018-19.jpg?resize=768%2C576"
-          size="large"
-        />
-      </Container>
-    </div>
-  )
-}
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
+  render() {
+    return <h1>{this.state.weather}</h1>
   }
 }
 
-export default connect(mapState)(UserHome)
+// /**
+//  * CONTAINER
+//  */
+// const mapState = state => {
+//   return {
+//     email: state.user.email
+//   }
+// }
 
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
-}
+// export default connect(mapState)(UserHome)
+
+// /**
+//  * PROP TYPES
+//  */
+// UserHome.propTypes = {
+//   email: PropTypes.string
+// }
